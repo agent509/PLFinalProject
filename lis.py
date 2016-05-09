@@ -12,6 +12,7 @@ Number = (int, float) # A Lisp Number is implemented as a Python int or float
 
 ################ Parsing: parse, tokenize, and read_from_tokens
 
+'''
 def parse(program):
     "Read a Scheme expression from a string."
     return read_from_tokens(tokenize(program))
@@ -43,14 +44,18 @@ def atom(token):
         try: return float(token)
         except ValueError:
             return Symbol(token)
-
+'''
 ################ Environments
 
 def standard_env():
     "An environment with some Scheme standard procedures."
     import math, operator as op
+    import listcomp
     env = Env()
     env.update(vars(math)) # sin, cos, sqrt, pi, ...
+
+    data = {}
+
     env.update({
         '+':op.add, '-':op.sub, '*':op.mul, '/':op.div, 
         '>':op.gt, '<':op.lt, '>=':op.ge, '<=':op.le, '=':op.eq, 
@@ -63,6 +68,7 @@ def standard_env():
         'cons':    lambda x,y: [x] + y,
         'eq?':     op.is_, 
         'equal?':  op.eq, 
+        'gettable': lambda x:listcomp.gettable(x),
         'length':  len, 
         'list':    lambda *x: list(x), 
         'list?':   lambda x: isinstance(x,list),
@@ -75,6 +81,8 @@ def standard_env():
         'number?': lambda x: isinstance(x, Number),   
         'procedure?': callable,
         'round':   round,
+        'select': lambda tab,*x: listcomp.select(tab,list(x)),
+        'sortby': lambda x,y: listcomp.sortby(y,x),
         'symbol?': lambda x: isinstance(x, Symbol),
     })
     return env

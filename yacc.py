@@ -76,7 +76,7 @@ def _print(l):
 name['print'] = _print
 
 #  Evaluation functions
-
+'''
 def lisp_eval(simb, items):
     if simb in name:
         return call(name[simb], eval_lists(items))
@@ -100,7 +100,7 @@ def eval_lists(l):
         else:
             r.append(i)
     return r
-
+'''
 # Utilities functions
 
 def is_list(l):
