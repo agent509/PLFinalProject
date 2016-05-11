@@ -5,9 +5,9 @@ _tabversion = '3.8'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'C9A024CB30CB4E73621C1C0BD8B585C1'
+_lr_signature = '133697CF774A69672C95B1CB49D7094C'
     
-_lr_action_items = {'QUOTE':([0,2,3,5,7,8,10,11,14,15,16,17,18,19,20,21,25,26,],[1,-15,-16,-19,-17,-14,-21,-20,1,-4,1,1,-10,-12,-11,-9,-5,-13,]),'$end':([0,2,3,5,6,7,8,9,10,11,12,13,15,25,26,],[-18,-15,-16,-19,-2,-17,-14,-3,-21,-20,0,-1,-4,-5,-13,]),'NUM':([0,2,3,5,7,8,10,11,14,15,16,17,18,19,20,21,25,26,],[3,-15,-16,-19,-17,-14,-21,-20,3,-4,3,3,-10,-12,-11,-9,-5,-13,]),'LPAREN':([0,1,2,3,5,7,8,10,11,14,15,16,17,18,19,20,21,25,26,],[4,14,-15,-16,-19,-17,-14,-21,-20,4,-4,4,4,-10,-12,-11,-9,-5,-13,]),'TRUE':([0,2,3,5,7,8,10,11,14,15,16,17,18,19,20,21,25,26,],[5,-15,-16,-19,-17,-14,-21,-20,5,-4,5,5,-10,-12,-11,-9,-5,-13,]),'TEXT':([0,2,3,5,7,8,10,11,14,15,16,17,18,19,20,21,25,26,],[7,-15,-16,-19,-17,-14,-21,-20,7,-4,7,7,-10,-12,-11,-9,-5,-13,]),'RPAREN':([2,3,5,7,8,10,11,14,15,16,17,18,19,20,21,22,23,24,25,26,],[-15,-16,-19,-17,-14,-21,-20,-8,-4,-8,-8,-10,-7,-11,-9,25,26,-6,-5,-13,]),'SIMB':([0,2,3,4,5,7,8,10,11,14,15,16,17,18,19,20,21,25,26,],[8,-15,-16,16,-19,-17,-14,-21,-20,8,-4,8,8,-10,-12,-11,-9,-5,-13,]),'NIL':([0,2,3,5,7,8,10,11,14,15,16,17,18,19,20,21,25,26,],[10,-15,-16,-19,-17,-14,-21,-20,10,-4,10,10,-10,-12,-11,-9,-5,-13,]),'FALSE':([0,2,3,5,7,8,10,11,14,15,16,17,18,19,20,21,25,26,],[11,-15,-16,-19,-17,-14,-21,-20,11,-4,11,11,-10,-12,-11,-9,-5,-13,]),}
+_lr_action_items = {'LPAREN':([0,1,2,3,5,6,7,9,11,12,13,15,17,18,19,21,22,23,24,25,27,31,32,33,34,35,36,38,39,44,62,65,68,70,],[1,1,-10,-48,-46,-9,-11,-6,-45,-7,-49,-44,-47,-8,1,-17,1,1,1,1,37,-16,-15,-12,-14,-13,1,1,-5,-4,1,1,-24,-23,]),'OBJECT':([45,47,57,],[52,52,52,]),'CLFLOAT':([0,1,2,3,5,6,7,9,11,12,13,15,17,18,19,21,22,23,24,25,31,32,33,34,35,36,38,39,44,62,65,68,70,],[3,3,-10,-48,-46,-9,-11,-6,-45,-7,-49,-44,-47,-8,3,-17,3,3,3,3,-16,-15,-12,-14,-13,3,3,-5,-4,3,3,-24,-23,]),'LCURLY':([49,50,51,52,53,54,55,56,61,],[-26,-25,-28,-30,-29,-27,60,-31,63,]),'COLON':([42,],[47,]),'LET':([0,2,3,5,6,7,9,11,12,13,15,17,18,19,21,31,32,33,34,35,36,38,39,44,62,65,68,70,],[10,-10,-48,-46,-9,-11,-6,-45,-7,-49,-44,-47,-8,10,-17,-16,-15,-12,-14,-13,10,10,-5,-4,10,10,-24,-23,]),'DIV':([2,3,5,7,11,13,15,17,20,21,31,32,33,34,35,],[22,-48,-46,-17,-45,-49,-44,-47,22,-17,-16,-15,22,-14,22,]),'TRUE':([0,1,2,3,5,6,7,9,11,12,13,15,17,18,19,21,22,23,24,25,31,32,33,34,35,36,38,39,44,62,65,68,70,],[5,5,-10,-48,-46,-9,-11,-6,-45,-7,-49,-44,-47,-8,5,-17,5,5,5,5,-16,-15,-12,-14,-13,5,5,-5,-4,5,5,-24,-23,]),'MINUS':([2,3,5,7,11,13,15,17,20,21,31,32,33,34,35,],[25,-48,-46,-17,-45,-49,-44,-47,25,-17,-16,-15,-12,-14,-13,]),'MULT':([2,3,5,7,11,13,15,17,20,21,31,32,33,34,35,],[24,-48,-46,-17,-45,-49,-44,-47,24,-17,-16,-15,24,-14,24,]),'RPAREN':([3,5,11,13,15,17,20,21,31,32,33,34,35,37,41,43,49,50,51,52,53,54,56,58,59,],[-48,-46,-45,-49,-44,-47,31,-17,-16,-15,-12,-14,-13,40,46,-19,-26,-25,-28,-30,-29,-27,-31,-18,-20,]),'RCURLY':([29,30,64,67,],[-3,-2,66,69,]),'PLUS':([2,3,5,7,11,13,15,17,20,21,31,32,33,34,35,],[23,-48,-46,-17,-45,-49,-44,-47,23,-17,-16,-15,-12,-14,-13,]),'COMMA':([43,49,50,51,52,53,54,56,58,],[48,-26,-25,-28,-30,-29,-27,-31,-18,]),'IDENTIFIER':([0,1,2,3,5,6,7,9,10,11,12,13,14,15,16,17,18,19,21,22,23,24,25,31,32,33,34,35,36,37,38,39,44,48,62,65,68,70,],[11,11,-10,-48,-46,-9,-11,-6,26,-45,-7,-49,27,-44,28,-47,-8,11,-17,11,11,11,11,-16,-15,-12,-14,-13,11,42,11,-5,-4,42,11,11,-24,-23,]),'$end':([4,8,29,30,],[-1,0,-3,-2,]),'STRING':([45,47,57,],[56,56,56,]),'newline':([2,3,5,6,7,9,11,12,13,15,17,18,19,21,31,32,33,34,35,39,44,60,63,66,68,69,70,],[-10,-48,-46,-9,-11,-6,-45,-7,-49,-44,-47,-8,30,-17,-16,-15,-12,-14,-13,-5,-4,62,65,68,-24,70,-23,]),'EQUALS':([26,28,],[36,38,]),'FUNC':([0,2,3,5,6,7,9,11,12,13,15,17,18,19,21,31,32,33,34,35,36,38,39,44,62,65,68,70,],[14,-10,-48,-46,-9,-11,-6,-45,-7,-49,-44,-47,-8,14,-17,-16,-15,-12,-14,-13,14,14,-5,-4,14,14,-24,-23,]),'INTEGER':([0,1,2,3,5,6,7,9,11,12,13,15,17,18,19,21,22,23,24,25,31,32,33,34,35,36,38,39,44,62,65,68,70,],[15,15,-10,-48,-46,-9,-11,-6,-45,-7,-49,-44,-47,-8,15,-17,15,15,15,15,-16,-15,-12,-14,-13,15,15,-5,-4,15,15,-24,-23,]),'VAR':([0,2,3,5,6,7,9,11,12,13,15,17,18,19,21,31,32,33,34,35,36,38,39,44,62,65,68,70,],[16,-10,-48,-46,-9,-11,-6,-45,-7,-49,-44,-47,-8,16,-17,-16,-15,-12,-14,-13,16,16,-5,-4,16,16,-24,-23,]),'BOOL':([45,47,57,],[54,54,54,]),'FALSE':([0,1,2,3,5,6,7,9,11,12,13,15,17,18,19,21,22,23,24,25,31,32,33,34,35,36,38,39,44,62,65,68,70,],[17,17,-10,-48,-46,-9,-11,-6,-45,-7,-49,-44,-47,-8,17,-17,17,17,17,17,-16,-15,-12,-14,-13,17,17,-5,-4,17,17,-24,-23,]),'TUPLE':([45,47,57,],[53,53,53,]),'INT':([45,47,57,],[50,50,50,]),'FLOAT':([45,47,57,],[49,49,49,]),'LIST':([45,47,57,],[51,51,51,]),'MAP_TO':([40,46,],[45,57,]),'CLSTRING':([0,1,2,3,5,6,7,9,11,12,13,15,17,18,19,21,22,23,24,25,31,32,33,34,35,36,38,39,44,62,65,68,70,],[13,13,-10,-48,-46,-9,-11,-6,-45,-7,-49,-44,-47,-8,13,-17,13,13,13,13,-16,-15,-12,-14,-13,13,13,-5,-4,13,13,-24,-23,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'item':([14,16,17,],[17,17,17,]),'bool':([0,14,16,17,],[2,2,2,2,]),'quoted_list':([0,14,16,17,],[6,18,18,18,]),'list':([1,],[15,]),'empty':([14,16,17,],[19,19,19,]),'call':([0,14,16,17,],[9,20,20,20,]),'exp':([0,],[12,]),'atom':([0,14,16,17,],[13,21,21,21,]),'items':([14,16,17,],[22,23,24,]),}
+_lr_goto_items = {'function':([0,19,36,38,62,65,],[12,12,12,12,12,12,]),'funcassign':([37,48,],[43,43,]),'funcassigns':([37,48,],[41,59,]),'type':([45,47,57,],[55,58,61,]),'primary':([0,1,19,22,23,24,25,36,38,62,65,],[2,20,2,32,33,34,35,2,2,2,2,]),'literal':([0,1,19,22,23,24,25,36,38,62,65,],[7,21,7,21,21,21,21,7,7,7,7,]),'program':([0,],[8,]),'statement':([0,19,36,38,62,65,],[9,9,9,9,9,9,]),'expressions':([0,19,62,65,],[4,29,64,67,]),'vardeclarations':([0,19,36,38,62,65,],[18,18,18,18,18,18,]),'expression':([0,19,36,38,62,65,],[19,19,39,44,19,19,]),'letdeclarations':([0,19,36,38,62,65,],[6,6,6,6,6,6,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -25,26 +25,54 @@ for _k, _v in _lr_goto_items.items():
        _lr_goto[_x][_k] = _y
 del _lr_goto_items
 _lr_productions = [
-  ("S' -> exp","S'",1,None,None,None),
-  ('exp -> atom','exp',1,'p_exp_atom','yacc.py',189),
-  ('exp -> quoted_list','exp',1,'p_exp_qlist','yacc.py',193),
-  ('exp -> call','exp',1,'p_exp_call','yacc.py',197),
-  ('quoted_list -> QUOTE list','quoted_list',2,'p_quoted_list','yacc.py',201),
-  ('list -> LPAREN items RPAREN','list',3,'p_list','yacc.py',205),
-  ('items -> item items','items',2,'p_items','yacc.py',209),
-  ('items -> empty','items',1,'p_items_empty','yacc.py',213),
-  ('empty -> <empty>','empty',0,'p_empty','yacc.py',217),
-  ('item -> atom','item',1,'p_item_atom','yacc.py',221),
-  ('item -> quoted_list','item',1,'p_item_list','yacc.py',229),
-  ('item -> call','item',1,'p_item_call','yacc.py',233),
-  ('item -> empty','item',1,'p_item_empty','yacc.py',237),
-  ('call -> LPAREN SIMB items RPAREN','call',4,'p_call','yacc.py',241),
-  ('atom -> SIMB','atom',1,'p_atom_simbol','yacc.py',246),
-  ('atom -> bool','atom',1,'p_atom_bool','yacc.py',250),
-  ('atom -> NUM','atom',1,'p_atom_num','yacc.py',254),
-  ('atom -> TEXT','atom',1,'p_atom_word','yacc.py',258),
-  ('atom -> <empty>','atom',0,'p_atom_empty','yacc.py',262),
-  ('bool -> TRUE','bool',1,'p_true','yacc.py',266),
-  ('bool -> FALSE','bool',1,'p_false','yacc.py',270),
-  ('atom -> NIL','atom',1,'p_nil','yacc.py',274),
+  ("S' -> program","S'",1,None,None,None),
+  ('program -> expressions','program',1,'p_program','HMM.py',119),
+  ('expressions -> expression newline','expressions',2,'p_expressions','HMM.py',124),
+  ('expressions -> expression expressions','expressions',2,'p_expressions','HMM.py',125),
+  ('vardeclarations -> VAR IDENTIFIER EQUALS expression','vardeclarations',4,'p_vardeclarations','HMM.py',129),
+  ('letdeclarations -> LET IDENTIFIER EQUALS expression','letdeclarations',4,'p_letdeclarations','HMM.py',134),
+  ('expression -> statement','expression',1,'p_expression','HMM.py',141),
+  ('expression -> function','expression',1,'p_expression','HMM.py',142),
+  ('expression -> vardeclarations','expression',1,'p_expression','HMM.py',143),
+  ('expression -> letdeclarations','expression',1,'p_expression','HMM.py',144),
+  ('statement -> primary','statement',1,'p_statement','HMM.py',150),
+  ('statement -> literal','statement',1,'p_statement','HMM.py',151),
+  ('primary -> primary PLUS primary','primary',3,'p_primary_binop','HMM.py',161),
+  ('primary -> primary MINUS primary','primary',3,'p_primary_binop','HMM.py',162),
+  ('primary -> primary MULT primary','primary',3,'p_primary_binop','HMM.py',163),
+  ('primary -> primary DIV primary','primary',3,'p_primary_binop','HMM.py',164),
+  ('primary -> LPAREN primary RPAREN','primary',3,'p_expression_group','HMM.py',188),
+  ('primary -> literal','primary',1,'p_expression_number','HMM.py',195),
+  ('funcassign -> IDENTIFIER COLON type','funcassign',3,'p_funcassign','HMM.py',203),
+  ('funcassigns -> funcassign','funcassigns',1,'p_funcassigns','HMM.py',206),
+  ('funcassigns -> funcassign COMMA funcassigns','funcassigns',3,'p_funcassigns','HMM.py',207),
+  ('types -> type','types',1,'p_types','HMM.py',210),
+  ('types -> type COMMA types','types',3,'p_types','HMM.py',211),
+  ('function -> FUNC IDENTIFIER LPAREN funcassigns RPAREN MAP_TO type LCURLY newline expressions RCURLY newline','function',12,'p_funciton','HMM.py',215),
+  ('function -> FUNC IDENTIFIER LPAREN RPAREN MAP_TO type LCURLY newline expressions RCURLY newline','function',11,'p_funciton','HMM.py',216),
+  ('type -> INT','type',1,'p_type','HMM.py',219),
+  ('type -> FLOAT','type',1,'p_type','HMM.py',220),
+  ('type -> BOOL','type',1,'p_type','HMM.py',221),
+  ('type -> LIST','type',1,'p_type','HMM.py',222),
+  ('type -> TUPLE','type',1,'p_type','HMM.py',223),
+  ('type -> OBJECT','type',1,'p_type','HMM.py',224),
+  ('type -> STRING','type',1,'p_type','HMM.py',225),
+  ('assignment -> IDENTIFIER EQUALS expression','assignment',3,'p_assignment','HMM.py',228),
+  ('equOp -> EQ_OP','equOp',1,'p_equOp','HMM.py',238),
+  ('equOp -> NE_OP','equOp',1,'p_equOp','HMM.py',239),
+  ('relOp -> LT_OP','relOp',1,'p_relOp','HMM.py',249),
+  ('relOp -> LE_OP','relOp',1,'p_relOp','HMM.py',250),
+  ('relOp -> GT_OP','relOp',1,'p_relOp','HMM.py',251),
+  ('relOp -> GE_OP','relOp',1,'p_relOp','HMM.py',252),
+  ('addOP -> PLUS','addOP',1,'p_addOP','HMM.py',256),
+  ('addOP -> MINUS','addOP',1,'p_addOP','HMM.py',257),
+  ('mulOP -> MULT','mulOP',1,'p_mulOP','HMM.py',267),
+  ('mulOP -> DIV','mulOP',1,'p_mulOP','HMM.py',268),
+  ('mulOP -> PRCNT','mulOP',1,'p_mulOP','HMM.py',269),
+  ('literal -> INTEGER','literal',1,'p_literal','HMM.py',288),
+  ('literal -> IDENTIFIER','literal',1,'p_literal','HMM.py',289),
+  ('literal -> TRUE','literal',1,'p_literal','HMM.py',290),
+  ('literal -> FALSE','literal',1,'p_literal','HMM.py',291),
+  ('literal -> CLFLOAT','literal',1,'p_literal','HMM.py',292),
+  ('literal -> CLSTRING','literal',1,'p_literal','HMM.py',293),
 ]

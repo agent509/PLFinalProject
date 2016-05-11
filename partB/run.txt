@@ -1,3 +1,0 @@
-echo "I am run.txt"
-echo "Leaving run.txt"
-

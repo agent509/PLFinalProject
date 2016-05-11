@@ -1,631 +1,1434 @@
 Created by PLY version 3.8 (http://www.dabeaz.com/ply)
 
+Unused terminals:
+
+    VOID
+    WHILE
+    RETURN
+    SEMI
+    ELEM
+    OR_OP
+    PIPE
+    RBRACE
+    FOR
+    ELSE
+    AND_OP
+    BANG
+    IF
+    LBRACE
+    SQUOTE
+    IFF
+    LAMBDA
+
 Grammar
 
-Rule 0     S' -> exp
-Rule 1     exp -> atom
-Rule 2     exp -> quoted_list
-Rule 3     exp -> call
-Rule 4     quoted_list -> QUOTE list
-Rule 5     list -> LPAREN items RPAREN
-Rule 6     items -> item items
-Rule 7     items -> empty
-Rule 8     empty -> <empty>
-Rule 9     item -> atom
-Rule 10    item -> quoted_list
-Rule 11    item -> call
-Rule 12    item -> empty
-Rule 13    call -> LPAREN SIMB items RPAREN
-Rule 14    atom -> SIMB
-Rule 15    atom -> bool
-Rule 16    atom -> NUM
-Rule 17    atom -> TEXT
-Rule 18    atom -> <empty>
-Rule 19    bool -> TRUE
-Rule 20    bool -> FALSE
-Rule 21    atom -> NIL
+Rule 0     S' -> program
+Rule 1     program -> expressions
+Rule 2     expressions -> expression newline
+Rule 3     expressions -> expression expressions
+Rule 4     vardeclarations -> VAR IDENTIFIER EQUALS expression
+Rule 5     letdeclarations -> LET IDENTIFIER EQUALS expression
+Rule 6     expression -> statement
+Rule 7     expression -> function
+Rule 8     expression -> vardeclarations
+Rule 9     expression -> letdeclarations
+Rule 10    statement -> primary
+Rule 11    statement -> literal
+Rule 12    primary -> primary PLUS primary
+Rule 13    primary -> primary MINUS primary
+Rule 14    primary -> primary MULT primary
+Rule 15    primary -> primary DIV primary
+Rule 16    primary -> LPAREN primary RPAREN
+Rule 17    primary -> literal
+Rule 18    funcassign -> IDENTIFIER COLON type
+Rule 19    funcassigns -> funcassign
+Rule 20    funcassigns -> funcassign COMMA funcassigns
+Rule 21    types -> type
+Rule 22    types -> type COMMA types
+Rule 23    function -> FUNC IDENTIFIER LPAREN funcassigns RPAREN MAP_TO type LCURLY newline expressions RCURLY newline
+Rule 24    function -> FUNC IDENTIFIER LPAREN RPAREN MAP_TO type LCURLY newline expressions RCURLY newline
+Rule 25    type -> INT
+Rule 26    type -> FLOAT
+Rule 27    type -> BOOL
+Rule 28    type -> LIST
+Rule 29    type -> TUPLE
+Rule 30    type -> OBJECT
+Rule 31    type -> STRING
+Rule 32    assignment -> IDENTIFIER EQUALS expression
+Rule 33    equOp -> EQ_OP
+Rule 34    equOp -> NE_OP
+Rule 35    relOp -> LT_OP
+Rule 36    relOp -> LE_OP
+Rule 37    relOp -> GT_OP
+Rule 38    relOp -> GE_OP
+Rule 39    addOP -> PLUS
+Rule 40    addOP -> MINUS
+Rule 41    mulOP -> MULT
+Rule 42    mulOP -> DIV
+Rule 43    mulOP -> PRCNT
+Rule 44    literal -> INTEGER
+Rule 45    literal -> IDENTIFIER
+Rule 46    literal -> TRUE
+Rule 47    literal -> FALSE
+Rule 48    literal -> CLFLOAT
+Rule 49    literal -> CLSTRING
 
 Terminals, with rules where they appear
 
-FALSE                : 20
-LPAREN               : 5 13
-NIL                  : 21
-NUM                  : 16
-QUOTE                : 4
-RPAREN               : 5 13
-SIMB                 : 13 14
-TEXT                 : 17
-TRUE                 : 19
+AND_OP               : 
+BANG                 : 
+BOOL                 : 27
+CLFLOAT              : 48
+CLSTRING             : 49
+COLON                : 18
+COMMA                : 20 22
+DIV                  : 15 42
+ELEM                 : 
+ELSE                 : 
+EQUALS               : 4 5 32
+EQ_OP                : 33
+FALSE                : 47
+FLOAT                : 26
+FOR                  : 
+FUNC                 : 23 24
+GE_OP                : 38
+GT_OP                : 37
+IDENTIFIER           : 4 5 18 23 24 32 45
+IF                   : 
+IFF                  : 
+INT                  : 25
+INTEGER              : 44
+LAMBDA               : 
+LBRACE               : 
+LCURLY               : 23 24
+LET                  : 5
+LE_OP                : 36
+LIST                 : 28
+LPAREN               : 16 23 24
+LT_OP                : 35
+MAP_TO               : 23 24
+MINUS                : 13 40
+MULT                 : 14 41
+NE_OP                : 34
+OBJECT               : 30
+OR_OP                : 
+PIPE                 : 
+PLUS                 : 12 39
+PRCNT                : 43
+RBRACE               : 
+RCURLY               : 23 24
+RETURN               : 
+RPAREN               : 16 23 24
+SEMI                 : 
+SQUOTE               : 
+STRING               : 31
+TRUE                 : 46
+TUPLE                : 29
+VAR                  : 4
+VOID                 : 
+WHILE                : 
 error                : 
+newline              : 2 23 23 24 24
 
 Nonterminals, with rules where they appear
 
-atom                 : 1 9
-bool                 : 15
-call                 : 3 11
-empty                : 7 12
-exp                  : 0
-item                 : 6
-items                : 5 6 13
-list                 : 4
-quoted_list          : 2 10
+addOP                : 
+assignment           : 
+equOp                : 
+expression           : 2 3 4 5 32
+expressions          : 1 3 23 24
+funcassign           : 19 20
+funcassigns          : 20 23
+function             : 7
+letdeclarations      : 9
+literal              : 11 17
+mulOP                : 
+primary              : 10 12 12 13 13 14 14 15 15 16
+program              : 0
+relOp                : 
+statement            : 6
+type                 : 18 21 22 23 24
+types                : 22
+vardeclarations      : 8
 
 Parsing method: LALR
 
 state 0
 
-    (0) S' -> . exp
-    (1) exp -> . atom
-    (2) exp -> . quoted_list
-    (3) exp -> . call
-    (14) atom -> . SIMB
-    (15) atom -> . bool
-    (16) atom -> . NUM
-    (17) atom -> . TEXT
-    (18) atom -> .
-    (21) atom -> . NIL
-    (4) quoted_list -> . QUOTE list
-    (13) call -> . LPAREN SIMB items RPAREN
-    (19) bool -> . TRUE
-    (20) bool -> . FALSE
+    (0) S' -> . program
+    (1) program -> . expressions
+    (2) expressions -> . expression newline
+    (3) expressions -> . expression expressions
+    (6) expression -> . statement
+    (7) expression -> . function
+    (8) expression -> . vardeclarations
+    (9) expression -> . letdeclarations
+    (10) statement -> . primary
+    (11) statement -> . literal
+    (23) function -> . FUNC IDENTIFIER LPAREN funcassigns RPAREN MAP_TO type LCURLY newline expressions RCURLY newline
+    (24) function -> . FUNC IDENTIFIER LPAREN RPAREN MAP_TO type LCURLY newline expressions RCURLY newline
+    (4) vardeclarations -> . VAR IDENTIFIER EQUALS expression
+    (5) letdeclarations -> . LET IDENTIFIER EQUALS expression
+    (12) primary -> . primary PLUS primary
+    (13) primary -> . primary MINUS primary
+    (14) primary -> . primary MULT primary
+    (15) primary -> . primary DIV primary
+    (16) primary -> . LPAREN primary RPAREN
+    (17) primary -> . literal
+    (44) literal -> . INTEGER
+    (45) literal -> . IDENTIFIER
+    (46) literal -> . TRUE
+    (47) literal -> . FALSE
+    (48) literal -> . CLFLOAT
+    (49) literal -> . CLSTRING
 
-    SIMB            shift and go to state 8
-    NUM             shift and go to state 3
-    TEXT            shift and go to state 7
-    $end            reduce using rule 18 (atom -> .)
-    NIL             shift and go to state 10
-    QUOTE           shift and go to state 1
-    LPAREN          shift and go to state 4
+    FUNC            shift and go to state 14
+    VAR             shift and go to state 16
+    LET             shift and go to state 10
+    LPAREN          shift and go to state 1
+    INTEGER         shift and go to state 15
+    IDENTIFIER      shift and go to state 11
     TRUE            shift and go to state 5
-    FALSE           shift and go to state 11
+    FALSE           shift and go to state 17
+    CLFLOAT         shift and go to state 3
+    CLSTRING        shift and go to state 13
 
-    bool                           shift and go to state 2
-    quoted_list                    shift and go to state 6
-    call                           shift and go to state 9
-    exp                            shift and go to state 12
-    atom                           shift and go to state 13
+    function                       shift and go to state 12
+    primary                        shift and go to state 2
+    literal                        shift and go to state 7
+    program                        shift and go to state 8
+    statement                      shift and go to state 9
+    expressions                    shift and go to state 4
+    vardeclarations                shift and go to state 18
+    expression                     shift and go to state 19
+    letdeclarations                shift and go to state 6
 
 state 1
 
-    (4) quoted_list -> QUOTE . list
-    (5) list -> . LPAREN items RPAREN
+    (16) primary -> LPAREN . primary RPAREN
+    (12) primary -> . primary PLUS primary
+    (13) primary -> . primary MINUS primary
+    (14) primary -> . primary MULT primary
+    (15) primary -> . primary DIV primary
+    (16) primary -> . LPAREN primary RPAREN
+    (17) primary -> . literal
+    (44) literal -> . INTEGER
+    (45) literal -> . IDENTIFIER
+    (46) literal -> . TRUE
+    (47) literal -> . FALSE
+    (48) literal -> . CLFLOAT
+    (49) literal -> . CLSTRING
 
-    LPAREN          shift and go to state 14
+    LPAREN          shift and go to state 1
+    INTEGER         shift and go to state 15
+    IDENTIFIER      shift and go to state 11
+    TRUE            shift and go to state 5
+    FALSE           shift and go to state 17
+    CLFLOAT         shift and go to state 3
+    CLSTRING        shift and go to state 13
 
-    list                           shift and go to state 15
+    literal                        shift and go to state 21
+    primary                        shift and go to state 20
 
 state 2
 
-    (15) atom -> bool .
+    (10) statement -> primary .
+    (12) primary -> primary . PLUS primary
+    (13) primary -> primary . MINUS primary
+    (14) primary -> primary . MULT primary
+    (15) primary -> primary . DIV primary
 
-    $end            reduce using rule 15 (atom -> bool .)
-    SIMB            reduce using rule 15 (atom -> bool .)
-    NUM             reduce using rule 15 (atom -> bool .)
-    TEXT            reduce using rule 15 (atom -> bool .)
-    NIL             reduce using rule 15 (atom -> bool .)
-    QUOTE           reduce using rule 15 (atom -> bool .)
-    LPAREN          reduce using rule 15 (atom -> bool .)
-    TRUE            reduce using rule 15 (atom -> bool .)
-    FALSE           reduce using rule 15 (atom -> bool .)
-    RPAREN          reduce using rule 15 (atom -> bool .)
+    newline         reduce using rule 10 (statement -> primary .)
+    FUNC            reduce using rule 10 (statement -> primary .)
+    VAR             reduce using rule 10 (statement -> primary .)
+    LET             reduce using rule 10 (statement -> primary .)
+    LPAREN          reduce using rule 10 (statement -> primary .)
+    INTEGER         reduce using rule 10 (statement -> primary .)
+    IDENTIFIER      reduce using rule 10 (statement -> primary .)
+    TRUE            reduce using rule 10 (statement -> primary .)
+    FALSE           reduce using rule 10 (statement -> primary .)
+    CLFLOAT         reduce using rule 10 (statement -> primary .)
+    CLSTRING        reduce using rule 10 (statement -> primary .)
+    PLUS            shift and go to state 23
+    MINUS           shift and go to state 25
+    MULT            shift and go to state 24
+    DIV             shift and go to state 22
 
 
 state 3
 
-    (16) atom -> NUM .
+    (48) literal -> CLFLOAT .
 
-    $end            reduce using rule 16 (atom -> NUM .)
-    SIMB            reduce using rule 16 (atom -> NUM .)
-    NUM             reduce using rule 16 (atom -> NUM .)
-    TEXT            reduce using rule 16 (atom -> NUM .)
-    NIL             reduce using rule 16 (atom -> NUM .)
-    QUOTE           reduce using rule 16 (atom -> NUM .)
-    LPAREN          reduce using rule 16 (atom -> NUM .)
-    TRUE            reduce using rule 16 (atom -> NUM .)
-    FALSE           reduce using rule 16 (atom -> NUM .)
-    RPAREN          reduce using rule 16 (atom -> NUM .)
+    PLUS            reduce using rule 48 (literal -> CLFLOAT .)
+    MINUS           reduce using rule 48 (literal -> CLFLOAT .)
+    MULT            reduce using rule 48 (literal -> CLFLOAT .)
+    DIV             reduce using rule 48 (literal -> CLFLOAT .)
+    newline         reduce using rule 48 (literal -> CLFLOAT .)
+    FUNC            reduce using rule 48 (literal -> CLFLOAT .)
+    VAR             reduce using rule 48 (literal -> CLFLOAT .)
+    LET             reduce using rule 48 (literal -> CLFLOAT .)
+    LPAREN          reduce using rule 48 (literal -> CLFLOAT .)
+    INTEGER         reduce using rule 48 (literal -> CLFLOAT .)
+    IDENTIFIER      reduce using rule 48 (literal -> CLFLOAT .)
+    TRUE            reduce using rule 48 (literal -> CLFLOAT .)
+    FALSE           reduce using rule 48 (literal -> CLFLOAT .)
+    CLFLOAT         reduce using rule 48 (literal -> CLFLOAT .)
+    CLSTRING        reduce using rule 48 (literal -> CLFLOAT .)
+    RPAREN          reduce using rule 48 (literal -> CLFLOAT .)
 
 
 state 4
 
-    (13) call -> LPAREN . SIMB items RPAREN
+    (1) program -> expressions .
 
-    SIMB            shift and go to state 16
+    $end            reduce using rule 1 (program -> expressions .)
 
 
 state 5
 
-    (19) bool -> TRUE .
+    (46) literal -> TRUE .
 
-    SIMB            reduce using rule 19 (bool -> TRUE .)
-    NUM             reduce using rule 19 (bool -> TRUE .)
-    TEXT            reduce using rule 19 (bool -> TRUE .)
-    NIL             reduce using rule 19 (bool -> TRUE .)
-    QUOTE           reduce using rule 19 (bool -> TRUE .)
-    LPAREN          reduce using rule 19 (bool -> TRUE .)
-    TRUE            reduce using rule 19 (bool -> TRUE .)
-    FALSE           reduce using rule 19 (bool -> TRUE .)
-    RPAREN          reduce using rule 19 (bool -> TRUE .)
-    $end            reduce using rule 19 (bool -> TRUE .)
+    PLUS            reduce using rule 46 (literal -> TRUE .)
+    MINUS           reduce using rule 46 (literal -> TRUE .)
+    MULT            reduce using rule 46 (literal -> TRUE .)
+    DIV             reduce using rule 46 (literal -> TRUE .)
+    newline         reduce using rule 46 (literal -> TRUE .)
+    FUNC            reduce using rule 46 (literal -> TRUE .)
+    VAR             reduce using rule 46 (literal -> TRUE .)
+    LET             reduce using rule 46 (literal -> TRUE .)
+    LPAREN          reduce using rule 46 (literal -> TRUE .)
+    INTEGER         reduce using rule 46 (literal -> TRUE .)
+    IDENTIFIER      reduce using rule 46 (literal -> TRUE .)
+    TRUE            reduce using rule 46 (literal -> TRUE .)
+    FALSE           reduce using rule 46 (literal -> TRUE .)
+    CLFLOAT         reduce using rule 46 (literal -> TRUE .)
+    CLSTRING        reduce using rule 46 (literal -> TRUE .)
+    RPAREN          reduce using rule 46 (literal -> TRUE .)
 
 
 state 6
 
-    (2) exp -> quoted_list .
+    (9) expression -> letdeclarations .
 
-    $end            reduce using rule 2 (exp -> quoted_list .)
+    newline         reduce using rule 9 (expression -> letdeclarations .)
+    FUNC            reduce using rule 9 (expression -> letdeclarations .)
+    VAR             reduce using rule 9 (expression -> letdeclarations .)
+    LET             reduce using rule 9 (expression -> letdeclarations .)
+    LPAREN          reduce using rule 9 (expression -> letdeclarations .)
+    INTEGER         reduce using rule 9 (expression -> letdeclarations .)
+    IDENTIFIER      reduce using rule 9 (expression -> letdeclarations .)
+    TRUE            reduce using rule 9 (expression -> letdeclarations .)
+    FALSE           reduce using rule 9 (expression -> letdeclarations .)
+    CLFLOAT         reduce using rule 9 (expression -> letdeclarations .)
+    CLSTRING        reduce using rule 9 (expression -> letdeclarations .)
 
 
 state 7
 
-    (17) atom -> TEXT .
+    (11) statement -> literal .
+    (17) primary -> literal .
 
-    $end            reduce using rule 17 (atom -> TEXT .)
-    SIMB            reduce using rule 17 (atom -> TEXT .)
-    NUM             reduce using rule 17 (atom -> TEXT .)
-    TEXT            reduce using rule 17 (atom -> TEXT .)
-    NIL             reduce using rule 17 (atom -> TEXT .)
-    QUOTE           reduce using rule 17 (atom -> TEXT .)
-    LPAREN          reduce using rule 17 (atom -> TEXT .)
-    TRUE            reduce using rule 17 (atom -> TEXT .)
-    FALSE           reduce using rule 17 (atom -> TEXT .)
-    RPAREN          reduce using rule 17 (atom -> TEXT .)
+  ! reduce/reduce conflict for newline resolved using rule 11 (statement -> literal .)
+  ! reduce/reduce conflict for FUNC resolved using rule 11 (statement -> literal .)
+  ! reduce/reduce conflict for VAR resolved using rule 11 (statement -> literal .)
+  ! reduce/reduce conflict for LET resolved using rule 11 (statement -> literal .)
+  ! reduce/reduce conflict for LPAREN resolved using rule 11 (statement -> literal .)
+  ! reduce/reduce conflict for INTEGER resolved using rule 11 (statement -> literal .)
+  ! reduce/reduce conflict for IDENTIFIER resolved using rule 11 (statement -> literal .)
+  ! reduce/reduce conflict for TRUE resolved using rule 11 (statement -> literal .)
+  ! reduce/reduce conflict for FALSE resolved using rule 11 (statement -> literal .)
+  ! reduce/reduce conflict for CLFLOAT resolved using rule 11 (statement -> literal .)
+  ! reduce/reduce conflict for CLSTRING resolved using rule 11 (statement -> literal .)
+    newline         reduce using rule 11 (statement -> literal .)
+    FUNC            reduce using rule 11 (statement -> literal .)
+    VAR             reduce using rule 11 (statement -> literal .)
+    LET             reduce using rule 11 (statement -> literal .)
+    LPAREN          reduce using rule 11 (statement -> literal .)
+    INTEGER         reduce using rule 11 (statement -> literal .)
+    IDENTIFIER      reduce using rule 11 (statement -> literal .)
+    TRUE            reduce using rule 11 (statement -> literal .)
+    FALSE           reduce using rule 11 (statement -> literal .)
+    CLFLOAT         reduce using rule 11 (statement -> literal .)
+    CLSTRING        reduce using rule 11 (statement -> literal .)
+    PLUS            reduce using rule 17 (primary -> literal .)
+    MINUS           reduce using rule 17 (primary -> literal .)
+    MULT            reduce using rule 17 (primary -> literal .)
+    DIV             reduce using rule 17 (primary -> literal .)
+
+  ! newline         [ reduce using rule 17 (primary -> literal .) ]
+  ! FUNC            [ reduce using rule 17 (primary -> literal .) ]
+  ! VAR             [ reduce using rule 17 (primary -> literal .) ]
+  ! LET             [ reduce using rule 17 (primary -> literal .) ]
+  ! LPAREN          [ reduce using rule 17 (primary -> literal .) ]
+  ! INTEGER         [ reduce using rule 17 (primary -> literal .) ]
+  ! IDENTIFIER      [ reduce using rule 17 (primary -> literal .) ]
+  ! TRUE            [ reduce using rule 17 (primary -> literal .) ]
+  ! FALSE           [ reduce using rule 17 (primary -> literal .) ]
+  ! CLFLOAT         [ reduce using rule 17 (primary -> literal .) ]
+  ! CLSTRING        [ reduce using rule 17 (primary -> literal .) ]
 
 
 state 8
 
-    (14) atom -> SIMB .
+    (0) S' -> program .
 
-    $end            reduce using rule 14 (atom -> SIMB .)
-    SIMB            reduce using rule 14 (atom -> SIMB .)
-    NUM             reduce using rule 14 (atom -> SIMB .)
-    TEXT            reduce using rule 14 (atom -> SIMB .)
-    NIL             reduce using rule 14 (atom -> SIMB .)
-    QUOTE           reduce using rule 14 (atom -> SIMB .)
-    LPAREN          reduce using rule 14 (atom -> SIMB .)
-    TRUE            reduce using rule 14 (atom -> SIMB .)
-    FALSE           reduce using rule 14 (atom -> SIMB .)
-    RPAREN          reduce using rule 14 (atom -> SIMB .)
 
 
 state 9
 
-    (3) exp -> call .
+    (6) expression -> statement .
 
-    $end            reduce using rule 3 (exp -> call .)
+    newline         reduce using rule 6 (expression -> statement .)
+    FUNC            reduce using rule 6 (expression -> statement .)
+    VAR             reduce using rule 6 (expression -> statement .)
+    LET             reduce using rule 6 (expression -> statement .)
+    LPAREN          reduce using rule 6 (expression -> statement .)
+    INTEGER         reduce using rule 6 (expression -> statement .)
+    IDENTIFIER      reduce using rule 6 (expression -> statement .)
+    TRUE            reduce using rule 6 (expression -> statement .)
+    FALSE           reduce using rule 6 (expression -> statement .)
+    CLFLOAT         reduce using rule 6 (expression -> statement .)
+    CLSTRING        reduce using rule 6 (expression -> statement .)
 
 
 state 10
 
-    (21) atom -> NIL .
+    (5) letdeclarations -> LET . IDENTIFIER EQUALS expression
 
-    $end            reduce using rule 21 (atom -> NIL .)
-    SIMB            reduce using rule 21 (atom -> NIL .)
-    NUM             reduce using rule 21 (atom -> NIL .)
-    TEXT            reduce using rule 21 (atom -> NIL .)
-    NIL             reduce using rule 21 (atom -> NIL .)
-    QUOTE           reduce using rule 21 (atom -> NIL .)
-    LPAREN          reduce using rule 21 (atom -> NIL .)
-    TRUE            reduce using rule 21 (atom -> NIL .)
-    FALSE           reduce using rule 21 (atom -> NIL .)
-    RPAREN          reduce using rule 21 (atom -> NIL .)
+    IDENTIFIER      shift and go to state 26
 
 
 state 11
 
-    (20) bool -> FALSE .
+    (45) literal -> IDENTIFIER .
 
-    SIMB            reduce using rule 20 (bool -> FALSE .)
-    NUM             reduce using rule 20 (bool -> FALSE .)
-    TEXT            reduce using rule 20 (bool -> FALSE .)
-    NIL             reduce using rule 20 (bool -> FALSE .)
-    QUOTE           reduce using rule 20 (bool -> FALSE .)
-    LPAREN          reduce using rule 20 (bool -> FALSE .)
-    TRUE            reduce using rule 20 (bool -> FALSE .)
-    FALSE           reduce using rule 20 (bool -> FALSE .)
-    RPAREN          reduce using rule 20 (bool -> FALSE .)
-    $end            reduce using rule 20 (bool -> FALSE .)
+    PLUS            reduce using rule 45 (literal -> IDENTIFIER .)
+    MINUS           reduce using rule 45 (literal -> IDENTIFIER .)
+    MULT            reduce using rule 45 (literal -> IDENTIFIER .)
+    DIV             reduce using rule 45 (literal -> IDENTIFIER .)
+    newline         reduce using rule 45 (literal -> IDENTIFIER .)
+    FUNC            reduce using rule 45 (literal -> IDENTIFIER .)
+    VAR             reduce using rule 45 (literal -> IDENTIFIER .)
+    LET             reduce using rule 45 (literal -> IDENTIFIER .)
+    LPAREN          reduce using rule 45 (literal -> IDENTIFIER .)
+    INTEGER         reduce using rule 45 (literal -> IDENTIFIER .)
+    IDENTIFIER      reduce using rule 45 (literal -> IDENTIFIER .)
+    TRUE            reduce using rule 45 (literal -> IDENTIFIER .)
+    FALSE           reduce using rule 45 (literal -> IDENTIFIER .)
+    CLFLOAT         reduce using rule 45 (literal -> IDENTIFIER .)
+    CLSTRING        reduce using rule 45 (literal -> IDENTIFIER .)
+    RPAREN          reduce using rule 45 (literal -> IDENTIFIER .)
 
 
 state 12
 
-    (0) S' -> exp .
+    (7) expression -> function .
 
+    newline         reduce using rule 7 (expression -> function .)
+    FUNC            reduce using rule 7 (expression -> function .)
+    VAR             reduce using rule 7 (expression -> function .)
+    LET             reduce using rule 7 (expression -> function .)
+    LPAREN          reduce using rule 7 (expression -> function .)
+    INTEGER         reduce using rule 7 (expression -> function .)
+    IDENTIFIER      reduce using rule 7 (expression -> function .)
+    TRUE            reduce using rule 7 (expression -> function .)
+    FALSE           reduce using rule 7 (expression -> function .)
+    CLFLOAT         reduce using rule 7 (expression -> function .)
+    CLSTRING        reduce using rule 7 (expression -> function .)
 
 
 state 13
 
-    (1) exp -> atom .
+    (49) literal -> CLSTRING .
 
-    $end            reduce using rule 1 (exp -> atom .)
+    PLUS            reduce using rule 49 (literal -> CLSTRING .)
+    MINUS           reduce using rule 49 (literal -> CLSTRING .)
+    MULT            reduce using rule 49 (literal -> CLSTRING .)
+    DIV             reduce using rule 49 (literal -> CLSTRING .)
+    newline         reduce using rule 49 (literal -> CLSTRING .)
+    FUNC            reduce using rule 49 (literal -> CLSTRING .)
+    VAR             reduce using rule 49 (literal -> CLSTRING .)
+    LET             reduce using rule 49 (literal -> CLSTRING .)
+    LPAREN          reduce using rule 49 (literal -> CLSTRING .)
+    INTEGER         reduce using rule 49 (literal -> CLSTRING .)
+    IDENTIFIER      reduce using rule 49 (literal -> CLSTRING .)
+    TRUE            reduce using rule 49 (literal -> CLSTRING .)
+    FALSE           reduce using rule 49 (literal -> CLSTRING .)
+    CLFLOAT         reduce using rule 49 (literal -> CLSTRING .)
+    CLSTRING        reduce using rule 49 (literal -> CLSTRING .)
+    RPAREN          reduce using rule 49 (literal -> CLSTRING .)
 
 
 state 14
 
-    (5) list -> LPAREN . items RPAREN
-    (6) items -> . item items
-    (7) items -> . empty
-    (9) item -> . atom
-    (10) item -> . quoted_list
-    (11) item -> . call
-    (12) item -> . empty
-    (8) empty -> .
-    (14) atom -> . SIMB
-    (15) atom -> . bool
-    (16) atom -> . NUM
-    (17) atom -> . TEXT
-    (18) atom -> .
-    (21) atom -> . NIL
-    (4) quoted_list -> . QUOTE list
-    (13) call -> . LPAREN SIMB items RPAREN
-    (19) bool -> . TRUE
-    (20) bool -> . FALSE
+    (23) function -> FUNC . IDENTIFIER LPAREN funcassigns RPAREN MAP_TO type LCURLY newline expressions RCURLY newline
+    (24) function -> FUNC . IDENTIFIER LPAREN RPAREN MAP_TO type LCURLY newline expressions RCURLY newline
 
-  ! shift/reduce conflict for SIMB resolved as shift
-  ! shift/reduce conflict for NUM resolved as shift
-  ! shift/reduce conflict for TEXT resolved as shift
-  ! shift/reduce conflict for SIMB resolved as shift
-  ! shift/reduce conflict for NUM resolved as shift
-  ! shift/reduce conflict for TEXT resolved as shift
-  ! reduce/reduce conflict for NIL resolved using rule 8 (empty -> .)
-  ! reduce/reduce conflict for QUOTE resolved using rule 8 (empty -> .)
-  ! reduce/reduce conflict for LPAREN resolved using rule 8 (empty -> .)
-  ! reduce/reduce conflict for TRUE resolved using rule 8 (empty -> .)
-  ! reduce/reduce conflict for FALSE resolved using rule 8 (empty -> .)
-  ! reduce/reduce conflict for RPAREN resolved using rule 8 (empty -> .)
-  ! shift/reduce conflict for NIL resolved as shift
-  ! shift/reduce conflict for QUOTE resolved as shift
-  ! shift/reduce conflict for LPAREN resolved as shift
-  ! shift/reduce conflict for TRUE resolved as shift
-  ! shift/reduce conflict for FALSE resolved as shift
-    RPAREN          reduce using rule 8 (empty -> .)
-    SIMB            shift and go to state 8
-    NUM             shift and go to state 3
-    TEXT            shift and go to state 7
-    NIL             shift and go to state 10
-    QUOTE           shift and go to state 1
-    LPAREN          shift and go to state 4
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 11
+    IDENTIFIER      shift and go to state 27
 
-  ! SIMB            [ reduce using rule 8 (empty -> .) ]
-  ! NUM             [ reduce using rule 8 (empty -> .) ]
-  ! TEXT            [ reduce using rule 8 (empty -> .) ]
-  ! NIL             [ reduce using rule 8 (empty -> .) ]
-  ! QUOTE           [ reduce using rule 8 (empty -> .) ]
-  ! LPAREN          [ reduce using rule 8 (empty -> .) ]
-  ! TRUE            [ reduce using rule 8 (empty -> .) ]
-  ! FALSE           [ reduce using rule 8 (empty -> .) ]
-  ! SIMB            [ reduce using rule 18 (atom -> .) ]
-  ! NUM             [ reduce using rule 18 (atom -> .) ]
-  ! TEXT            [ reduce using rule 18 (atom -> .) ]
-  ! NIL             [ reduce using rule 18 (atom -> .) ]
-  ! QUOTE           [ reduce using rule 18 (atom -> .) ]
-  ! LPAREN          [ reduce using rule 18 (atom -> .) ]
-  ! TRUE            [ reduce using rule 18 (atom -> .) ]
-  ! FALSE           [ reduce using rule 18 (atom -> .) ]
-  ! RPAREN          [ reduce using rule 18 (atom -> .) ]
-
-    item                           shift and go to state 17
-    bool                           shift and go to state 2
-    quoted_list                    shift and go to state 18
-    empty                          shift and go to state 19
-    call                           shift and go to state 20
-    atom                           shift and go to state 21
-    items                          shift and go to state 22
 
 state 15
 
-    (4) quoted_list -> QUOTE list .
+    (44) literal -> INTEGER .
 
-    SIMB            reduce using rule 4 (quoted_list -> QUOTE list .)
-    NUM             reduce using rule 4 (quoted_list -> QUOTE list .)
-    TEXT            reduce using rule 4 (quoted_list -> QUOTE list .)
-    NIL             reduce using rule 4 (quoted_list -> QUOTE list .)
-    QUOTE           reduce using rule 4 (quoted_list -> QUOTE list .)
-    LPAREN          reduce using rule 4 (quoted_list -> QUOTE list .)
-    TRUE            reduce using rule 4 (quoted_list -> QUOTE list .)
-    FALSE           reduce using rule 4 (quoted_list -> QUOTE list .)
-    RPAREN          reduce using rule 4 (quoted_list -> QUOTE list .)
-    $end            reduce using rule 4 (quoted_list -> QUOTE list .)
+    PLUS            reduce using rule 44 (literal -> INTEGER .)
+    MINUS           reduce using rule 44 (literal -> INTEGER .)
+    MULT            reduce using rule 44 (literal -> INTEGER .)
+    DIV             reduce using rule 44 (literal -> INTEGER .)
+    newline         reduce using rule 44 (literal -> INTEGER .)
+    FUNC            reduce using rule 44 (literal -> INTEGER .)
+    VAR             reduce using rule 44 (literal -> INTEGER .)
+    LET             reduce using rule 44 (literal -> INTEGER .)
+    LPAREN          reduce using rule 44 (literal -> INTEGER .)
+    INTEGER         reduce using rule 44 (literal -> INTEGER .)
+    IDENTIFIER      reduce using rule 44 (literal -> INTEGER .)
+    TRUE            reduce using rule 44 (literal -> INTEGER .)
+    FALSE           reduce using rule 44 (literal -> INTEGER .)
+    CLFLOAT         reduce using rule 44 (literal -> INTEGER .)
+    CLSTRING        reduce using rule 44 (literal -> INTEGER .)
+    RPAREN          reduce using rule 44 (literal -> INTEGER .)
 
 
 state 16
 
-    (13) call -> LPAREN SIMB . items RPAREN
-    (6) items -> . item items
-    (7) items -> . empty
-    (9) item -> . atom
-    (10) item -> . quoted_list
-    (11) item -> . call
-    (12) item -> . empty
-    (8) empty -> .
-    (14) atom -> . SIMB
-    (15) atom -> . bool
-    (16) atom -> . NUM
-    (17) atom -> . TEXT
-    (18) atom -> .
-    (21) atom -> . NIL
-    (4) quoted_list -> . QUOTE list
-    (13) call -> . LPAREN SIMB items RPAREN
-    (19) bool -> . TRUE
-    (20) bool -> . FALSE
+    (4) vardeclarations -> VAR . IDENTIFIER EQUALS expression
 
-  ! shift/reduce conflict for SIMB resolved as shift
-  ! shift/reduce conflict for NUM resolved as shift
-  ! shift/reduce conflict for TEXT resolved as shift
-  ! shift/reduce conflict for SIMB resolved as shift
-  ! shift/reduce conflict for NUM resolved as shift
-  ! shift/reduce conflict for TEXT resolved as shift
-  ! reduce/reduce conflict for NIL resolved using rule 8 (empty -> .)
-  ! reduce/reduce conflict for QUOTE resolved using rule 8 (empty -> .)
-  ! reduce/reduce conflict for LPAREN resolved using rule 8 (empty -> .)
-  ! reduce/reduce conflict for TRUE resolved using rule 8 (empty -> .)
-  ! reduce/reduce conflict for FALSE resolved using rule 8 (empty -> .)
-  ! reduce/reduce conflict for RPAREN resolved using rule 8 (empty -> .)
-  ! shift/reduce conflict for NIL resolved as shift
-  ! shift/reduce conflict for QUOTE resolved as shift
-  ! shift/reduce conflict for LPAREN resolved as shift
-  ! shift/reduce conflict for TRUE resolved as shift
-  ! shift/reduce conflict for FALSE resolved as shift
-    RPAREN          reduce using rule 8 (empty -> .)
-    SIMB            shift and go to state 8
-    NUM             shift and go to state 3
-    TEXT            shift and go to state 7
-    NIL             shift and go to state 10
-    QUOTE           shift and go to state 1
-    LPAREN          shift and go to state 4
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 11
+    IDENTIFIER      shift and go to state 28
 
-  ! SIMB            [ reduce using rule 8 (empty -> .) ]
-  ! NUM             [ reduce using rule 8 (empty -> .) ]
-  ! TEXT            [ reduce using rule 8 (empty -> .) ]
-  ! NIL             [ reduce using rule 8 (empty -> .) ]
-  ! QUOTE           [ reduce using rule 8 (empty -> .) ]
-  ! LPAREN          [ reduce using rule 8 (empty -> .) ]
-  ! TRUE            [ reduce using rule 8 (empty -> .) ]
-  ! FALSE           [ reduce using rule 8 (empty -> .) ]
-  ! SIMB            [ reduce using rule 18 (atom -> .) ]
-  ! NUM             [ reduce using rule 18 (atom -> .) ]
-  ! TEXT            [ reduce using rule 18 (atom -> .) ]
-  ! NIL             [ reduce using rule 18 (atom -> .) ]
-  ! QUOTE           [ reduce using rule 18 (atom -> .) ]
-  ! LPAREN          [ reduce using rule 18 (atom -> .) ]
-  ! TRUE            [ reduce using rule 18 (atom -> .) ]
-  ! FALSE           [ reduce using rule 18 (atom -> .) ]
-  ! RPAREN          [ reduce using rule 18 (atom -> .) ]
-
-    item                           shift and go to state 17
-    bool                           shift and go to state 2
-    quoted_list                    shift and go to state 18
-    empty                          shift and go to state 19
-    call                           shift and go to state 20
-    atom                           shift and go to state 21
-    items                          shift and go to state 23
 
 state 17
 
-    (6) items -> item . items
-    (6) items -> . item items
-    (7) items -> . empty
-    (9) item -> . atom
-    (10) item -> . quoted_list
-    (11) item -> . call
-    (12) item -> . empty
-    (8) empty -> .
-    (14) atom -> . SIMB
-    (15) atom -> . bool
-    (16) atom -> . NUM
-    (17) atom -> . TEXT
-    (18) atom -> .
-    (21) atom -> . NIL
-    (4) quoted_list -> . QUOTE list
-    (13) call -> . LPAREN SIMB items RPAREN
-    (19) bool -> . TRUE
-    (20) bool -> . FALSE
+    (47) literal -> FALSE .
 
-  ! shift/reduce conflict for SIMB resolved as shift
-  ! shift/reduce conflict for NUM resolved as shift
-  ! shift/reduce conflict for TEXT resolved as shift
-  ! shift/reduce conflict for SIMB resolved as shift
-  ! shift/reduce conflict for NUM resolved as shift
-  ! shift/reduce conflict for TEXT resolved as shift
-  ! reduce/reduce conflict for NIL resolved using rule 8 (empty -> .)
-  ! reduce/reduce conflict for QUOTE resolved using rule 8 (empty -> .)
-  ! reduce/reduce conflict for LPAREN resolved using rule 8 (empty -> .)
-  ! reduce/reduce conflict for TRUE resolved using rule 8 (empty -> .)
-  ! reduce/reduce conflict for FALSE resolved using rule 8 (empty -> .)
-  ! reduce/reduce conflict for RPAREN resolved using rule 8 (empty -> .)
-  ! shift/reduce conflict for NIL resolved as shift
-  ! shift/reduce conflict for QUOTE resolved as shift
-  ! shift/reduce conflict for LPAREN resolved as shift
-  ! shift/reduce conflict for TRUE resolved as shift
-  ! shift/reduce conflict for FALSE resolved as shift
-    RPAREN          reduce using rule 8 (empty -> .)
-    SIMB            shift and go to state 8
-    NUM             shift and go to state 3
-    TEXT            shift and go to state 7
-    NIL             shift and go to state 10
-    QUOTE           shift and go to state 1
-    LPAREN          shift and go to state 4
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 11
+    PLUS            reduce using rule 47 (literal -> FALSE .)
+    MINUS           reduce using rule 47 (literal -> FALSE .)
+    MULT            reduce using rule 47 (literal -> FALSE .)
+    DIV             reduce using rule 47 (literal -> FALSE .)
+    newline         reduce using rule 47 (literal -> FALSE .)
+    FUNC            reduce using rule 47 (literal -> FALSE .)
+    VAR             reduce using rule 47 (literal -> FALSE .)
+    LET             reduce using rule 47 (literal -> FALSE .)
+    LPAREN          reduce using rule 47 (literal -> FALSE .)
+    INTEGER         reduce using rule 47 (literal -> FALSE .)
+    IDENTIFIER      reduce using rule 47 (literal -> FALSE .)
+    TRUE            reduce using rule 47 (literal -> FALSE .)
+    FALSE           reduce using rule 47 (literal -> FALSE .)
+    CLFLOAT         reduce using rule 47 (literal -> FALSE .)
+    CLSTRING        reduce using rule 47 (literal -> FALSE .)
+    RPAREN          reduce using rule 47 (literal -> FALSE .)
 
-  ! SIMB            [ reduce using rule 8 (empty -> .) ]
-  ! NUM             [ reduce using rule 8 (empty -> .) ]
-  ! TEXT            [ reduce using rule 8 (empty -> .) ]
-  ! NIL             [ reduce using rule 8 (empty -> .) ]
-  ! QUOTE           [ reduce using rule 8 (empty -> .) ]
-  ! LPAREN          [ reduce using rule 8 (empty -> .) ]
-  ! TRUE            [ reduce using rule 8 (empty -> .) ]
-  ! FALSE           [ reduce using rule 8 (empty -> .) ]
-  ! SIMB            [ reduce using rule 18 (atom -> .) ]
-  ! NUM             [ reduce using rule 18 (atom -> .) ]
-  ! TEXT            [ reduce using rule 18 (atom -> .) ]
-  ! NIL             [ reduce using rule 18 (atom -> .) ]
-  ! QUOTE           [ reduce using rule 18 (atom -> .) ]
-  ! LPAREN          [ reduce using rule 18 (atom -> .) ]
-  ! TRUE            [ reduce using rule 18 (atom -> .) ]
-  ! FALSE           [ reduce using rule 18 (atom -> .) ]
-  ! RPAREN          [ reduce using rule 18 (atom -> .) ]
-
-    item                           shift and go to state 17
-    bool                           shift and go to state 2
-    quoted_list                    shift and go to state 18
-    empty                          shift and go to state 19
-    call                           shift and go to state 20
-    atom                           shift and go to state 21
-    items                          shift and go to state 24
 
 state 18
 
-    (10) item -> quoted_list .
+    (8) expression -> vardeclarations .
 
-    SIMB            reduce using rule 10 (item -> quoted_list .)
-    NUM             reduce using rule 10 (item -> quoted_list .)
-    TEXT            reduce using rule 10 (item -> quoted_list .)
-    NIL             reduce using rule 10 (item -> quoted_list .)
-    QUOTE           reduce using rule 10 (item -> quoted_list .)
-    LPAREN          reduce using rule 10 (item -> quoted_list .)
-    TRUE            reduce using rule 10 (item -> quoted_list .)
-    FALSE           reduce using rule 10 (item -> quoted_list .)
-    RPAREN          reduce using rule 10 (item -> quoted_list .)
+    newline         reduce using rule 8 (expression -> vardeclarations .)
+    FUNC            reduce using rule 8 (expression -> vardeclarations .)
+    VAR             reduce using rule 8 (expression -> vardeclarations .)
+    LET             reduce using rule 8 (expression -> vardeclarations .)
+    LPAREN          reduce using rule 8 (expression -> vardeclarations .)
+    INTEGER         reduce using rule 8 (expression -> vardeclarations .)
+    IDENTIFIER      reduce using rule 8 (expression -> vardeclarations .)
+    TRUE            reduce using rule 8 (expression -> vardeclarations .)
+    FALSE           reduce using rule 8 (expression -> vardeclarations .)
+    CLFLOAT         reduce using rule 8 (expression -> vardeclarations .)
+    CLSTRING        reduce using rule 8 (expression -> vardeclarations .)
 
 
 state 19
 
-    (7) items -> empty .
-    (12) item -> empty .
+    (2) expressions -> expression . newline
+    (3) expressions -> expression . expressions
+    (2) expressions -> . expression newline
+    (3) expressions -> . expression expressions
+    (6) expression -> . statement
+    (7) expression -> . function
+    (8) expression -> . vardeclarations
+    (9) expression -> . letdeclarations
+    (10) statement -> . primary
+    (11) statement -> . literal
+    (23) function -> . FUNC IDENTIFIER LPAREN funcassigns RPAREN MAP_TO type LCURLY newline expressions RCURLY newline
+    (24) function -> . FUNC IDENTIFIER LPAREN RPAREN MAP_TO type LCURLY newline expressions RCURLY newline
+    (4) vardeclarations -> . VAR IDENTIFIER EQUALS expression
+    (5) letdeclarations -> . LET IDENTIFIER EQUALS expression
+    (12) primary -> . primary PLUS primary
+    (13) primary -> . primary MINUS primary
+    (14) primary -> . primary MULT primary
+    (15) primary -> . primary DIV primary
+    (16) primary -> . LPAREN primary RPAREN
+    (17) primary -> . literal
+    (44) literal -> . INTEGER
+    (45) literal -> . IDENTIFIER
+    (46) literal -> . TRUE
+    (47) literal -> . FALSE
+    (48) literal -> . CLFLOAT
+    (49) literal -> . CLSTRING
 
-  ! reduce/reduce conflict for RPAREN resolved using rule 7 (items -> empty .)
-    RPAREN          reduce using rule 7 (items -> empty .)
-    SIMB            reduce using rule 12 (item -> empty .)
-    NUM             reduce using rule 12 (item -> empty .)
-    TEXT            reduce using rule 12 (item -> empty .)
-    NIL             reduce using rule 12 (item -> empty .)
-    QUOTE           reduce using rule 12 (item -> empty .)
-    LPAREN          reduce using rule 12 (item -> empty .)
-    TRUE            reduce using rule 12 (item -> empty .)
-    FALSE           reduce using rule 12 (item -> empty .)
+    newline         shift and go to state 30
+    FUNC            shift and go to state 14
+    VAR             shift and go to state 16
+    LET             shift and go to state 10
+    LPAREN          shift and go to state 1
+    INTEGER         shift and go to state 15
+    IDENTIFIER      shift and go to state 11
+    TRUE            shift and go to state 5
+    FALSE           shift and go to state 17
+    CLFLOAT         shift and go to state 3
+    CLSTRING        shift and go to state 13
 
-  ! RPAREN          [ reduce using rule 12 (item -> empty .) ]
-
+    function                       shift and go to state 12
+    primary                        shift and go to state 2
+    literal                        shift and go to state 7
+    statement                      shift and go to state 9
+    expressions                    shift and go to state 29
+    vardeclarations                shift and go to state 18
+    expression                     shift and go to state 19
+    letdeclarations                shift and go to state 6
 
 state 20
 
-    (11) item -> call .
+    (16) primary -> LPAREN primary . RPAREN
+    (12) primary -> primary . PLUS primary
+    (13) primary -> primary . MINUS primary
+    (14) primary -> primary . MULT primary
+    (15) primary -> primary . DIV primary
 
-    SIMB            reduce using rule 11 (item -> call .)
-    NUM             reduce using rule 11 (item -> call .)
-    TEXT            reduce using rule 11 (item -> call .)
-    NIL             reduce using rule 11 (item -> call .)
-    QUOTE           reduce using rule 11 (item -> call .)
-    LPAREN          reduce using rule 11 (item -> call .)
-    TRUE            reduce using rule 11 (item -> call .)
-    FALSE           reduce using rule 11 (item -> call .)
-    RPAREN          reduce using rule 11 (item -> call .)
+    RPAREN          shift and go to state 31
+    PLUS            shift and go to state 23
+    MINUS           shift and go to state 25
+    MULT            shift and go to state 24
+    DIV             shift and go to state 22
 
 
 state 21
 
-    (9) item -> atom .
+    (17) primary -> literal .
 
-    SIMB            reduce using rule 9 (item -> atom .)
-    NUM             reduce using rule 9 (item -> atom .)
-    TEXT            reduce using rule 9 (item -> atom .)
-    NIL             reduce using rule 9 (item -> atom .)
-    QUOTE           reduce using rule 9 (item -> atom .)
-    LPAREN          reduce using rule 9 (item -> atom .)
-    TRUE            reduce using rule 9 (item -> atom .)
-    FALSE           reduce using rule 9 (item -> atom .)
-    RPAREN          reduce using rule 9 (item -> atom .)
+    PLUS            reduce using rule 17 (primary -> literal .)
+    MINUS           reduce using rule 17 (primary -> literal .)
+    MULT            reduce using rule 17 (primary -> literal .)
+    DIV             reduce using rule 17 (primary -> literal .)
+    newline         reduce using rule 17 (primary -> literal .)
+    FUNC            reduce using rule 17 (primary -> literal .)
+    VAR             reduce using rule 17 (primary -> literal .)
+    LET             reduce using rule 17 (primary -> literal .)
+    LPAREN          reduce using rule 17 (primary -> literal .)
+    INTEGER         reduce using rule 17 (primary -> literal .)
+    IDENTIFIER      reduce using rule 17 (primary -> literal .)
+    TRUE            reduce using rule 17 (primary -> literal .)
+    FALSE           reduce using rule 17 (primary -> literal .)
+    CLFLOAT         reduce using rule 17 (primary -> literal .)
+    CLSTRING        reduce using rule 17 (primary -> literal .)
+    RPAREN          reduce using rule 17 (primary -> literal .)
 
 
 state 22
 
-    (5) list -> LPAREN items . RPAREN
+    (15) primary -> primary DIV . primary
+    (12) primary -> . primary PLUS primary
+    (13) primary -> . primary MINUS primary
+    (14) primary -> . primary MULT primary
+    (15) primary -> . primary DIV primary
+    (16) primary -> . LPAREN primary RPAREN
+    (17) primary -> . literal
+    (44) literal -> . INTEGER
+    (45) literal -> . IDENTIFIER
+    (46) literal -> . TRUE
+    (47) literal -> . FALSE
+    (48) literal -> . CLFLOAT
+    (49) literal -> . CLSTRING
 
-    RPAREN          shift and go to state 25
+    LPAREN          shift and go to state 1
+    INTEGER         shift and go to state 15
+    IDENTIFIER      shift and go to state 11
+    TRUE            shift and go to state 5
+    FALSE           shift and go to state 17
+    CLFLOAT         shift and go to state 3
+    CLSTRING        shift and go to state 13
 
+    literal                        shift and go to state 21
+    primary                        shift and go to state 32
 
 state 23
 
-    (13) call -> LPAREN SIMB items . RPAREN
+    (12) primary -> primary PLUS . primary
+    (12) primary -> . primary PLUS primary
+    (13) primary -> . primary MINUS primary
+    (14) primary -> . primary MULT primary
+    (15) primary -> . primary DIV primary
+    (16) primary -> . LPAREN primary RPAREN
+    (17) primary -> . literal
+    (44) literal -> . INTEGER
+    (45) literal -> . IDENTIFIER
+    (46) literal -> . TRUE
+    (47) literal -> . FALSE
+    (48) literal -> . CLFLOAT
+    (49) literal -> . CLSTRING
 
-    RPAREN          shift and go to state 26
+    LPAREN          shift and go to state 1
+    INTEGER         shift and go to state 15
+    IDENTIFIER      shift and go to state 11
+    TRUE            shift and go to state 5
+    FALSE           shift and go to state 17
+    CLFLOAT         shift and go to state 3
+    CLSTRING        shift and go to state 13
 
+    literal                        shift and go to state 21
+    primary                        shift and go to state 33
 
 state 24
 
-    (6) items -> item items .
+    (14) primary -> primary MULT . primary
+    (12) primary -> . primary PLUS primary
+    (13) primary -> . primary MINUS primary
+    (14) primary -> . primary MULT primary
+    (15) primary -> . primary DIV primary
+    (16) primary -> . LPAREN primary RPAREN
+    (17) primary -> . literal
+    (44) literal -> . INTEGER
+    (45) literal -> . IDENTIFIER
+    (46) literal -> . TRUE
+    (47) literal -> . FALSE
+    (48) literal -> . CLFLOAT
+    (49) literal -> . CLSTRING
 
-    RPAREN          reduce using rule 6 (items -> item items .)
+    LPAREN          shift and go to state 1
+    INTEGER         shift and go to state 15
+    IDENTIFIER      shift and go to state 11
+    TRUE            shift and go to state 5
+    FALSE           shift and go to state 17
+    CLFLOAT         shift and go to state 3
+    CLSTRING        shift and go to state 13
 
+    literal                        shift and go to state 21
+    primary                        shift and go to state 34
 
 state 25
 
-    (5) list -> LPAREN items RPAREN .
+    (13) primary -> primary MINUS . primary
+    (12) primary -> . primary PLUS primary
+    (13) primary -> . primary MINUS primary
+    (14) primary -> . primary MULT primary
+    (15) primary -> . primary DIV primary
+    (16) primary -> . LPAREN primary RPAREN
+    (17) primary -> . literal
+    (44) literal -> . INTEGER
+    (45) literal -> . IDENTIFIER
+    (46) literal -> . TRUE
+    (47) literal -> . FALSE
+    (48) literal -> . CLFLOAT
+    (49) literal -> . CLSTRING
 
-    $end            reduce using rule 5 (list -> LPAREN items RPAREN .)
-    SIMB            reduce using rule 5 (list -> LPAREN items RPAREN .)
-    NUM             reduce using rule 5 (list -> LPAREN items RPAREN .)
-    TEXT            reduce using rule 5 (list -> LPAREN items RPAREN .)
-    NIL             reduce using rule 5 (list -> LPAREN items RPAREN .)
-    QUOTE           reduce using rule 5 (list -> LPAREN items RPAREN .)
-    LPAREN          reduce using rule 5 (list -> LPAREN items RPAREN .)
-    TRUE            reduce using rule 5 (list -> LPAREN items RPAREN .)
-    FALSE           reduce using rule 5 (list -> LPAREN items RPAREN .)
-    RPAREN          reduce using rule 5 (list -> LPAREN items RPAREN .)
+    LPAREN          shift and go to state 1
+    INTEGER         shift and go to state 15
+    IDENTIFIER      shift and go to state 11
+    TRUE            shift and go to state 5
+    FALSE           shift and go to state 17
+    CLFLOAT         shift and go to state 3
+    CLSTRING        shift and go to state 13
 
+    literal                        shift and go to state 21
+    primary                        shift and go to state 35
 
 state 26
 
-    (13) call -> LPAREN SIMB items RPAREN .
+    (5) letdeclarations -> LET IDENTIFIER . EQUALS expression
 
-    SIMB            reduce using rule 13 (call -> LPAREN SIMB items RPAREN .)
-    NUM             reduce using rule 13 (call -> LPAREN SIMB items RPAREN .)
-    TEXT            reduce using rule 13 (call -> LPAREN SIMB items RPAREN .)
-    NIL             reduce using rule 13 (call -> LPAREN SIMB items RPAREN .)
-    QUOTE           reduce using rule 13 (call -> LPAREN SIMB items RPAREN .)
-    LPAREN          reduce using rule 13 (call -> LPAREN SIMB items RPAREN .)
-    TRUE            reduce using rule 13 (call -> LPAREN SIMB items RPAREN .)
-    FALSE           reduce using rule 13 (call -> LPAREN SIMB items RPAREN .)
-    RPAREN          reduce using rule 13 (call -> LPAREN SIMB items RPAREN .)
-    $end            reduce using rule 13 (call -> LPAREN SIMB items RPAREN .)
+    EQUALS          shift and go to state 36
+
+
+state 27
+
+    (23) function -> FUNC IDENTIFIER . LPAREN funcassigns RPAREN MAP_TO type LCURLY newline expressions RCURLY newline
+    (24) function -> FUNC IDENTIFIER . LPAREN RPAREN MAP_TO type LCURLY newline expressions RCURLY newline
+
+    LPAREN          shift and go to state 37
+
+
+state 28
+
+    (4) vardeclarations -> VAR IDENTIFIER . EQUALS expression
+
+    EQUALS          shift and go to state 38
+
+
+state 29
+
+    (3) expressions -> expression expressions .
+
+    $end            reduce using rule 3 (expressions -> expression expressions .)
+    RCURLY          reduce using rule 3 (expressions -> expression expressions .)
+
+
+state 30
+
+    (2) expressions -> expression newline .
+
+    $end            reduce using rule 2 (expressions -> expression newline .)
+    RCURLY          reduce using rule 2 (expressions -> expression newline .)
+
+
+state 31
+
+    (16) primary -> LPAREN primary RPAREN .
+
+    PLUS            reduce using rule 16 (primary -> LPAREN primary RPAREN .)
+    MINUS           reduce using rule 16 (primary -> LPAREN primary RPAREN .)
+    MULT            reduce using rule 16 (primary -> LPAREN primary RPAREN .)
+    DIV             reduce using rule 16 (primary -> LPAREN primary RPAREN .)
+    newline         reduce using rule 16 (primary -> LPAREN primary RPAREN .)
+    FUNC            reduce using rule 16 (primary -> LPAREN primary RPAREN .)
+    VAR             reduce using rule 16 (primary -> LPAREN primary RPAREN .)
+    LET             reduce using rule 16 (primary -> LPAREN primary RPAREN .)
+    LPAREN          reduce using rule 16 (primary -> LPAREN primary RPAREN .)
+    INTEGER         reduce using rule 16 (primary -> LPAREN primary RPAREN .)
+    IDENTIFIER      reduce using rule 16 (primary -> LPAREN primary RPAREN .)
+    TRUE            reduce using rule 16 (primary -> LPAREN primary RPAREN .)
+    FALSE           reduce using rule 16 (primary -> LPAREN primary RPAREN .)
+    CLFLOAT         reduce using rule 16 (primary -> LPAREN primary RPAREN .)
+    CLSTRING        reduce using rule 16 (primary -> LPAREN primary RPAREN .)
+    RPAREN          reduce using rule 16 (primary -> LPAREN primary RPAREN .)
+
+
+state 32
+
+    (15) primary -> primary DIV primary .
+    (12) primary -> primary . PLUS primary
+    (13) primary -> primary . MINUS primary
+    (14) primary -> primary . MULT primary
+    (15) primary -> primary . DIV primary
+
+    PLUS            reduce using rule 15 (primary -> primary DIV primary .)
+    MINUS           reduce using rule 15 (primary -> primary DIV primary .)
+    MULT            reduce using rule 15 (primary -> primary DIV primary .)
+    DIV             reduce using rule 15 (primary -> primary DIV primary .)
+    newline         reduce using rule 15 (primary -> primary DIV primary .)
+    FUNC            reduce using rule 15 (primary -> primary DIV primary .)
+    VAR             reduce using rule 15 (primary -> primary DIV primary .)
+    LET             reduce using rule 15 (primary -> primary DIV primary .)
+    LPAREN          reduce using rule 15 (primary -> primary DIV primary .)
+    INTEGER         reduce using rule 15 (primary -> primary DIV primary .)
+    IDENTIFIER      reduce using rule 15 (primary -> primary DIV primary .)
+    TRUE            reduce using rule 15 (primary -> primary DIV primary .)
+    FALSE           reduce using rule 15 (primary -> primary DIV primary .)
+    CLFLOAT         reduce using rule 15 (primary -> primary DIV primary .)
+    CLSTRING        reduce using rule 15 (primary -> primary DIV primary .)
+    RPAREN          reduce using rule 15 (primary -> primary DIV primary .)
+
+  ! PLUS            [ shift and go to state 23 ]
+  ! MINUS           [ shift and go to state 25 ]
+  ! MULT            [ shift and go to state 24 ]
+  ! DIV             [ shift and go to state 22 ]
+
+
+state 33
+
+    (12) primary -> primary PLUS primary .
+    (12) primary -> primary . PLUS primary
+    (13) primary -> primary . MINUS primary
+    (14) primary -> primary . MULT primary
+    (15) primary -> primary . DIV primary
+
+    PLUS            reduce using rule 12 (primary -> primary PLUS primary .)
+    MINUS           reduce using rule 12 (primary -> primary PLUS primary .)
+    newline         reduce using rule 12 (primary -> primary PLUS primary .)
+    FUNC            reduce using rule 12 (primary -> primary PLUS primary .)
+    VAR             reduce using rule 12 (primary -> primary PLUS primary .)
+    LET             reduce using rule 12 (primary -> primary PLUS primary .)
+    LPAREN          reduce using rule 12 (primary -> primary PLUS primary .)
+    INTEGER         reduce using rule 12 (primary -> primary PLUS primary .)
+    IDENTIFIER      reduce using rule 12 (primary -> primary PLUS primary .)
+    TRUE            reduce using rule 12 (primary -> primary PLUS primary .)
+    FALSE           reduce using rule 12 (primary -> primary PLUS primary .)
+    CLFLOAT         reduce using rule 12 (primary -> primary PLUS primary .)
+    CLSTRING        reduce using rule 12 (primary -> primary PLUS primary .)
+    RPAREN          reduce using rule 12 (primary -> primary PLUS primary .)
+    MULT            shift and go to state 24
+    DIV             shift and go to state 22
+
+  ! MULT            [ reduce using rule 12 (primary -> primary PLUS primary .) ]
+  ! DIV             [ reduce using rule 12 (primary -> primary PLUS primary .) ]
+  ! PLUS            [ shift and go to state 23 ]
+  ! MINUS           [ shift and go to state 25 ]
+
+
+state 34
+
+    (14) primary -> primary MULT primary .
+    (12) primary -> primary . PLUS primary
+    (13) primary -> primary . MINUS primary
+    (14) primary -> primary . MULT primary
+    (15) primary -> primary . DIV primary
+
+    PLUS            reduce using rule 14 (primary -> primary MULT primary .)
+    MINUS           reduce using rule 14 (primary -> primary MULT primary .)
+    MULT            reduce using rule 14 (primary -> primary MULT primary .)
+    DIV             reduce using rule 14 (primary -> primary MULT primary .)
+    newline         reduce using rule 14 (primary -> primary MULT primary .)
+    FUNC            reduce using rule 14 (primary -> primary MULT primary .)
+    VAR             reduce using rule 14 (primary -> primary MULT primary .)
+    LET             reduce using rule 14 (primary -> primary MULT primary .)
+    LPAREN          reduce using rule 14 (primary -> primary MULT primary .)
+    INTEGER         reduce using rule 14 (primary -> primary MULT primary .)
+    IDENTIFIER      reduce using rule 14 (primary -> primary MULT primary .)
+    TRUE            reduce using rule 14 (primary -> primary MULT primary .)
+    FALSE           reduce using rule 14 (primary -> primary MULT primary .)
+    CLFLOAT         reduce using rule 14 (primary -> primary MULT primary .)
+    CLSTRING        reduce using rule 14 (primary -> primary MULT primary .)
+    RPAREN          reduce using rule 14 (primary -> primary MULT primary .)
+
+  ! PLUS            [ shift and go to state 23 ]
+  ! MINUS           [ shift and go to state 25 ]
+  ! MULT            [ shift and go to state 24 ]
+  ! DIV             [ shift and go to state 22 ]
+
+
+state 35
+
+    (13) primary -> primary MINUS primary .
+    (12) primary -> primary . PLUS primary
+    (13) primary -> primary . MINUS primary
+    (14) primary -> primary . MULT primary
+    (15) primary -> primary . DIV primary
+
+    PLUS            reduce using rule 13 (primary -> primary MINUS primary .)
+    MINUS           reduce using rule 13 (primary -> primary MINUS primary .)
+    newline         reduce using rule 13 (primary -> primary MINUS primary .)
+    FUNC            reduce using rule 13 (primary -> primary MINUS primary .)
+    VAR             reduce using rule 13 (primary -> primary MINUS primary .)
+    LET             reduce using rule 13 (primary -> primary MINUS primary .)
+    LPAREN          reduce using rule 13 (primary -> primary MINUS primary .)
+    INTEGER         reduce using rule 13 (primary -> primary MINUS primary .)
+    IDENTIFIER      reduce using rule 13 (primary -> primary MINUS primary .)
+    TRUE            reduce using rule 13 (primary -> primary MINUS primary .)
+    FALSE           reduce using rule 13 (primary -> primary MINUS primary .)
+    CLFLOAT         reduce using rule 13 (primary -> primary MINUS primary .)
+    CLSTRING        reduce using rule 13 (primary -> primary MINUS primary .)
+    RPAREN          reduce using rule 13 (primary -> primary MINUS primary .)
+    MULT            shift and go to state 24
+    DIV             shift and go to state 22
+
+  ! MULT            [ reduce using rule 13 (primary -> primary MINUS primary .) ]
+  ! DIV             [ reduce using rule 13 (primary -> primary MINUS primary .) ]
+  ! PLUS            [ shift and go to state 23 ]
+  ! MINUS           [ shift and go to state 25 ]
+
+
+state 36
+
+    (5) letdeclarations -> LET IDENTIFIER EQUALS . expression
+    (6) expression -> . statement
+    (7) expression -> . function
+    (8) expression -> . vardeclarations
+    (9) expression -> . letdeclarations
+    (10) statement -> . primary
+    (11) statement -> . literal
+    (23) function -> . FUNC IDENTIFIER LPAREN funcassigns RPAREN MAP_TO type LCURLY newline expressions RCURLY newline
+    (24) function -> . FUNC IDENTIFIER LPAREN RPAREN MAP_TO type LCURLY newline expressions RCURLY newline
+    (4) vardeclarations -> . VAR IDENTIFIER EQUALS expression
+    (5) letdeclarations -> . LET IDENTIFIER EQUALS expression
+    (12) primary -> . primary PLUS primary
+    (13) primary -> . primary MINUS primary
+    (14) primary -> . primary MULT primary
+    (15) primary -> . primary DIV primary
+    (16) primary -> . LPAREN primary RPAREN
+    (17) primary -> . literal
+    (44) literal -> . INTEGER
+    (45) literal -> . IDENTIFIER
+    (46) literal -> . TRUE
+    (47) literal -> . FALSE
+    (48) literal -> . CLFLOAT
+    (49) literal -> . CLSTRING
+
+    FUNC            shift and go to state 14
+    VAR             shift and go to state 16
+    LET             shift and go to state 10
+    LPAREN          shift and go to state 1
+    INTEGER         shift and go to state 15
+    IDENTIFIER      shift and go to state 11
+    TRUE            shift and go to state 5
+    FALSE           shift and go to state 17
+    CLFLOAT         shift and go to state 3
+    CLSTRING        shift and go to state 13
+
+    function                       shift and go to state 12
+    primary                        shift and go to state 2
+    literal                        shift and go to state 7
+    statement                      shift and go to state 9
+    vardeclarations                shift and go to state 18
+    expression                     shift and go to state 39
+    letdeclarations                shift and go to state 6
+
+state 37
+
+    (23) function -> FUNC IDENTIFIER LPAREN . funcassigns RPAREN MAP_TO type LCURLY newline expressions RCURLY newline
+    (24) function -> FUNC IDENTIFIER LPAREN . RPAREN MAP_TO type LCURLY newline expressions RCURLY newline
+    (19) funcassigns -> . funcassign
+    (20) funcassigns -> . funcassign COMMA funcassigns
+    (18) funcassign -> . IDENTIFIER COLON type
+
+    RPAREN          shift and go to state 40
+    IDENTIFIER      shift and go to state 42
+
+    funcassign                     shift and go to state 43
+    funcassigns                    shift and go to state 41
+
+state 38
+
+    (4) vardeclarations -> VAR IDENTIFIER EQUALS . expression
+    (6) expression -> . statement
+    (7) expression -> . function
+    (8) expression -> . vardeclarations
+    (9) expression -> . letdeclarations
+    (10) statement -> . primary
+    (11) statement -> . literal
+    (23) function -> . FUNC IDENTIFIER LPAREN funcassigns RPAREN MAP_TO type LCURLY newline expressions RCURLY newline
+    (24) function -> . FUNC IDENTIFIER LPAREN RPAREN MAP_TO type LCURLY newline expressions RCURLY newline
+    (4) vardeclarations -> . VAR IDENTIFIER EQUALS expression
+    (5) letdeclarations -> . LET IDENTIFIER EQUALS expression
+    (12) primary -> . primary PLUS primary
+    (13) primary -> . primary MINUS primary
+    (14) primary -> . primary MULT primary
+    (15) primary -> . primary DIV primary
+    (16) primary -> . LPAREN primary RPAREN
+    (17) primary -> . literal
+    (44) literal -> . INTEGER
+    (45) literal -> . IDENTIFIER
+    (46) literal -> . TRUE
+    (47) literal -> . FALSE
+    (48) literal -> . CLFLOAT
+    (49) literal -> . CLSTRING
+
+    FUNC            shift and go to state 14
+    VAR             shift and go to state 16
+    LET             shift and go to state 10
+    LPAREN          shift and go to state 1
+    INTEGER         shift and go to state 15
+    IDENTIFIER      shift and go to state 11
+    TRUE            shift and go to state 5
+    FALSE           shift and go to state 17
+    CLFLOAT         shift and go to state 3
+    CLSTRING        shift and go to state 13
+
+    function                       shift and go to state 12
+    primary                        shift and go to state 2
+    literal                        shift and go to state 7
+    statement                      shift and go to state 9
+    vardeclarations                shift and go to state 18
+    expression                     shift and go to state 44
+    letdeclarations                shift and go to state 6
+
+state 39
+
+    (5) letdeclarations -> LET IDENTIFIER EQUALS expression .
+
+    newline         reduce using rule 5 (letdeclarations -> LET IDENTIFIER EQUALS expression .)
+    FUNC            reduce using rule 5 (letdeclarations -> LET IDENTIFIER EQUALS expression .)
+    VAR             reduce using rule 5 (letdeclarations -> LET IDENTIFIER EQUALS expression .)
+    LET             reduce using rule 5 (letdeclarations -> LET IDENTIFIER EQUALS expression .)
+    LPAREN          reduce using rule 5 (letdeclarations -> LET IDENTIFIER EQUALS expression .)
+    INTEGER         reduce using rule 5 (letdeclarations -> LET IDENTIFIER EQUALS expression .)
+    IDENTIFIER      reduce using rule 5 (letdeclarations -> LET IDENTIFIER EQUALS expression .)
+    TRUE            reduce using rule 5 (letdeclarations -> LET IDENTIFIER EQUALS expression .)
+    FALSE           reduce using rule 5 (letdeclarations -> LET IDENTIFIER EQUALS expression .)
+    CLFLOAT         reduce using rule 5 (letdeclarations -> LET IDENTIFIER EQUALS expression .)
+    CLSTRING        reduce using rule 5 (letdeclarations -> LET IDENTIFIER EQUALS expression .)
+
+
+state 40
+
+    (24) function -> FUNC IDENTIFIER LPAREN RPAREN . MAP_TO type LCURLY newline expressions RCURLY newline
+
+    MAP_TO          shift and go to state 45
+
+
+state 41
+
+    (23) function -> FUNC IDENTIFIER LPAREN funcassigns . RPAREN MAP_TO type LCURLY newline expressions RCURLY newline
+
+    RPAREN          shift and go to state 46
+
+
+state 42
+
+    (18) funcassign -> IDENTIFIER . COLON type
+
+    COLON           shift and go to state 47
+
+
+state 43
+
+    (19) funcassigns -> funcassign .
+    (20) funcassigns -> funcassign . COMMA funcassigns
+
+    RPAREN          reduce using rule 19 (funcassigns -> funcassign .)
+    COMMA           shift and go to state 48
+
+
+state 44
+
+    (4) vardeclarations -> VAR IDENTIFIER EQUALS expression .
+
+    newline         reduce using rule 4 (vardeclarations -> VAR IDENTIFIER EQUALS expression .)
+    FUNC            reduce using rule 4 (vardeclarations -> VAR IDENTIFIER EQUALS expression .)
+    VAR             reduce using rule 4 (vardeclarations -> VAR IDENTIFIER EQUALS expression .)
+    LET             reduce using rule 4 (vardeclarations -> VAR IDENTIFIER EQUALS expression .)
+    LPAREN          reduce using rule 4 (vardeclarations -> VAR IDENTIFIER EQUALS expression .)
+    INTEGER         reduce using rule 4 (vardeclarations -> VAR IDENTIFIER EQUALS expression .)
+    IDENTIFIER      reduce using rule 4 (vardeclarations -> VAR IDENTIFIER EQUALS expression .)
+    TRUE            reduce using rule 4 (vardeclarations -> VAR IDENTIFIER EQUALS expression .)
+    FALSE           reduce using rule 4 (vardeclarations -> VAR IDENTIFIER EQUALS expression .)
+    CLFLOAT         reduce using rule 4 (vardeclarations -> VAR IDENTIFIER EQUALS expression .)
+    CLSTRING        reduce using rule 4 (vardeclarations -> VAR IDENTIFIER EQUALS expression .)
+
+
+state 45
+
+    (24) function -> FUNC IDENTIFIER LPAREN RPAREN MAP_TO . type LCURLY newline expressions RCURLY newline
+    (25) type -> . INT
+    (26) type -> . FLOAT
+    (27) type -> . BOOL
+    (28) type -> . LIST
+    (29) type -> . TUPLE
+    (30) type -> . OBJECT
+    (31) type -> . STRING
+
+    INT             shift and go to state 50
+    FLOAT           shift and go to state 49
+    BOOL            shift and go to state 54
+    LIST            shift and go to state 51
+    TUPLE           shift and go to state 53
+    OBJECT          shift and go to state 52
+    STRING          shift and go to state 56
+
+    type                           shift and go to state 55
+
+state 46
+
+    (23) function -> FUNC IDENTIFIER LPAREN funcassigns RPAREN . MAP_TO type LCURLY newline expressions RCURLY newline
+
+    MAP_TO          shift and go to state 57
+
+
+state 47
+
+    (18) funcassign -> IDENTIFIER COLON . type
+    (25) type -> . INT
+    (26) type -> . FLOAT
+    (27) type -> . BOOL
+    (28) type -> . LIST
+    (29) type -> . TUPLE
+    (30) type -> . OBJECT
+    (31) type -> . STRING
+
+    INT             shift and go to state 50
+    FLOAT           shift and go to state 49
+    BOOL            shift and go to state 54
+    LIST            shift and go to state 51
+    TUPLE           shift and go to state 53
+    OBJECT          shift and go to state 52
+    STRING          shift and go to state 56
+
+    type                           shift and go to state 58
+
+state 48
+
+    (20) funcassigns -> funcassign COMMA . funcassigns
+    (19) funcassigns -> . funcassign
+    (20) funcassigns -> . funcassign COMMA funcassigns
+    (18) funcassign -> . IDENTIFIER COLON type
+
+    IDENTIFIER      shift and go to state 42
+
+    funcassigns                    shift and go to state 59
+    funcassign                     shift and go to state 43
+
+state 49
+
+    (26) type -> FLOAT .
+
+    COMMA           reduce using rule 26 (type -> FLOAT .)
+    RPAREN          reduce using rule 26 (type -> FLOAT .)
+    LCURLY          reduce using rule 26 (type -> FLOAT .)
+
+
+state 50
+
+    (25) type -> INT .
+
+    COMMA           reduce using rule 25 (type -> INT .)
+    RPAREN          reduce using rule 25 (type -> INT .)
+    LCURLY          reduce using rule 25 (type -> INT .)
+
+
+state 51
+
+    (28) type -> LIST .
+
+    COMMA           reduce using rule 28 (type -> LIST .)
+    RPAREN          reduce using rule 28 (type -> LIST .)
+    LCURLY          reduce using rule 28 (type -> LIST .)
+
+
+state 52
+
+    (30) type -> OBJECT .
+
+    COMMA           reduce using rule 30 (type -> OBJECT .)
+    RPAREN          reduce using rule 30 (type -> OBJECT .)
+    LCURLY          reduce using rule 30 (type -> OBJECT .)
+
+
+state 53
+
+    (29) type -> TUPLE .
+
+    COMMA           reduce using rule 29 (type -> TUPLE .)
+    RPAREN          reduce using rule 29 (type -> TUPLE .)
+    LCURLY          reduce using rule 29 (type -> TUPLE .)
+
+
+state 54
+
+    (27) type -> BOOL .
+
+    COMMA           reduce using rule 27 (type -> BOOL .)
+    RPAREN          reduce using rule 27 (type -> BOOL .)
+    LCURLY          reduce using rule 27 (type -> BOOL .)
+
+
+state 55
+
+    (24) function -> FUNC IDENTIFIER LPAREN RPAREN MAP_TO type . LCURLY newline expressions RCURLY newline
+
+    LCURLY          shift and go to state 60
+
+
+state 56
+
+    (31) type -> STRING .
+
+    COMMA           reduce using rule 31 (type -> STRING .)
+    RPAREN          reduce using rule 31 (type -> STRING .)
+    LCURLY          reduce using rule 31 (type -> STRING .)
+
+
+state 57
+
+    (23) function -> FUNC IDENTIFIER LPAREN funcassigns RPAREN MAP_TO . type LCURLY newline expressions RCURLY newline
+    (25) type -> . INT
+    (26) type -> . FLOAT
+    (27) type -> . BOOL
+    (28) type -> . LIST
+    (29) type -> . TUPLE
+    (30) type -> . OBJECT
+    (31) type -> . STRING
+
+    INT             shift and go to state 50
+    FLOAT           shift and go to state 49
+    BOOL            shift and go to state 54
+    LIST            shift and go to state 51
+    TUPLE           shift and go to state 53
+    OBJECT          shift and go to state 52
+    STRING          shift and go to state 56
+
+    type                           shift and go to state 61
+
+state 58
+
+    (18) funcassign -> IDENTIFIER COLON type .
+
+    COMMA           reduce using rule 18 (funcassign -> IDENTIFIER COLON type .)
+    RPAREN          reduce using rule 18 (funcassign -> IDENTIFIER COLON type .)
+
+
+state 59
+
+    (20) funcassigns -> funcassign COMMA funcassigns .
+
+    RPAREN          reduce using rule 20 (funcassigns -> funcassign COMMA funcassigns .)
+
+
+state 60
+
+    (24) function -> FUNC IDENTIFIER LPAREN RPAREN MAP_TO type LCURLY . newline expressions RCURLY newline
+
+    newline         shift and go to state 62
+
+
+state 61
+
+    (23) function -> FUNC IDENTIFIER LPAREN funcassigns RPAREN MAP_TO type . LCURLY newline expressions RCURLY newline
+
+    LCURLY          shift and go to state 63
+
+
+state 62
+
+    (24) function -> FUNC IDENTIFIER LPAREN RPAREN MAP_TO type LCURLY newline . expressions RCURLY newline
+    (2) expressions -> . expression newline
+    (3) expressions -> . expression expressions
+    (6) expression -> . statement
+    (7) expression -> . function
+    (8) expression -> . vardeclarations
+    (9) expression -> . letdeclarations
+    (10) statement -> . primary
+    (11) statement -> . literal
+    (23) function -> . FUNC IDENTIFIER LPAREN funcassigns RPAREN MAP_TO type LCURLY newline expressions RCURLY newline
+    (24) function -> . FUNC IDENTIFIER LPAREN RPAREN MAP_TO type LCURLY newline expressions RCURLY newline
+    (4) vardeclarations -> . VAR IDENTIFIER EQUALS expression
+    (5) letdeclarations -> . LET IDENTIFIER EQUALS expression
+    (12) primary -> . primary PLUS primary
+    (13) primary -> . primary MINUS primary
+    (14) primary -> . primary MULT primary
+    (15) primary -> . primary DIV primary
+    (16) primary -> . LPAREN primary RPAREN
+    (17) primary -> . literal
+    (44) literal -> . INTEGER
+    (45) literal -> . IDENTIFIER
+    (46) literal -> . TRUE
+    (47) literal -> . FALSE
+    (48) literal -> . CLFLOAT
+    (49) literal -> . CLSTRING
+
+    FUNC            shift and go to state 14
+    VAR             shift and go to state 16
+    LET             shift and go to state 10
+    LPAREN          shift and go to state 1
+    INTEGER         shift and go to state 15
+    IDENTIFIER      shift and go to state 11
+    TRUE            shift and go to state 5
+    FALSE           shift and go to state 17
+    CLFLOAT         shift and go to state 3
+    CLSTRING        shift and go to state 13
+
+    function                       shift and go to state 12
+    primary                        shift and go to state 2
+    literal                        shift and go to state 7
+    statement                      shift and go to state 9
+    expressions                    shift and go to state 64
+    vardeclarations                shift and go to state 18
+    expression                     shift and go to state 19
+    letdeclarations                shift and go to state 6
+
+state 63
+
+    (23) function -> FUNC IDENTIFIER LPAREN funcassigns RPAREN MAP_TO type LCURLY . newline expressions RCURLY newline
+
+    newline         shift and go to state 65
+
+
+state 64
+
+    (24) function -> FUNC IDENTIFIER LPAREN RPAREN MAP_TO type LCURLY newline expressions . RCURLY newline
+
+    RCURLY          shift and go to state 66
+
+
+state 65
+
+    (23) function -> FUNC IDENTIFIER LPAREN funcassigns RPAREN MAP_TO type LCURLY newline . expressions RCURLY newline
+    (2) expressions -> . expression newline
+    (3) expressions -> . expression expressions
+    (6) expression -> . statement
+    (7) expression -> . function
+    (8) expression -> . vardeclarations
+    (9) expression -> . letdeclarations
+    (10) statement -> . primary
+    (11) statement -> . literal
+    (23) function -> . FUNC IDENTIFIER LPAREN funcassigns RPAREN MAP_TO type LCURLY newline expressions RCURLY newline
+    (24) function -> . FUNC IDENTIFIER LPAREN RPAREN MAP_TO type LCURLY newline expressions RCURLY newline
+    (4) vardeclarations -> . VAR IDENTIFIER EQUALS expression
+    (5) letdeclarations -> . LET IDENTIFIER EQUALS expression
+    (12) primary -> . primary PLUS primary
+    (13) primary -> . primary MINUS primary
+    (14) primary -> . primary MULT primary
+    (15) primary -> . primary DIV primary
+    (16) primary -> . LPAREN primary RPAREN
+    (17) primary -> . literal
+    (44) literal -> . INTEGER
+    (45) literal -> . IDENTIFIER
+    (46) literal -> . TRUE
+    (47) literal -> . FALSE
+    (48) literal -> . CLFLOAT
+    (49) literal -> . CLSTRING
+
+    FUNC            shift and go to state 14
+    VAR             shift and go to state 16
+    LET             shift and go to state 10
+    LPAREN          shift and go to state 1
+    INTEGER         shift and go to state 15
+    IDENTIFIER      shift and go to state 11
+    TRUE            shift and go to state 5
+    FALSE           shift and go to state 17
+    CLFLOAT         shift and go to state 3
+    CLSTRING        shift and go to state 13
+
+    function                       shift and go to state 12
+    primary                        shift and go to state 2
+    literal                        shift and go to state 7
+    statement                      shift and go to state 9
+    expressions                    shift and go to state 67
+    vardeclarations                shift and go to state 18
+    expression                     shift and go to state 19
+    letdeclarations                shift and go to state 6
+
+state 66
+
+    (24) function -> FUNC IDENTIFIER LPAREN RPAREN MAP_TO type LCURLY newline expressions RCURLY . newline
+
+    newline         shift and go to state 68
+
+
+state 67
+
+    (23) function -> FUNC IDENTIFIER LPAREN funcassigns RPAREN MAP_TO type LCURLY newline expressions . RCURLY newline
+
+    RCURLY          shift and go to state 69
+
+
+state 68
+
+    (24) function -> FUNC IDENTIFIER LPAREN RPAREN MAP_TO type LCURLY newline expressions RCURLY newline .
+
+    newline         reduce using rule 24 (function -> FUNC IDENTIFIER LPAREN RPAREN MAP_TO type LCURLY newline expressions RCURLY newline .)
+    FUNC            reduce using rule 24 (function -> FUNC IDENTIFIER LPAREN RPAREN MAP_TO type LCURLY newline expressions RCURLY newline .)
+    VAR             reduce using rule 24 (function -> FUNC IDENTIFIER LPAREN RPAREN MAP_TO type LCURLY newline expressions RCURLY newline .)
+    LET             reduce using rule 24 (function -> FUNC IDENTIFIER LPAREN RPAREN MAP_TO type LCURLY newline expressions RCURLY newline .)
+    LPAREN          reduce using rule 24 (function -> FUNC IDENTIFIER LPAREN RPAREN MAP_TO type LCURLY newline expressions RCURLY newline .)
+    INTEGER         reduce using rule 24 (function -> FUNC IDENTIFIER LPAREN RPAREN MAP_TO type LCURLY newline expressions RCURLY newline .)
+    IDENTIFIER      reduce using rule 24 (function -> FUNC IDENTIFIER LPAREN RPAREN MAP_TO type LCURLY newline expressions RCURLY newline .)
+    TRUE            reduce using rule 24 (function -> FUNC IDENTIFIER LPAREN RPAREN MAP_TO type LCURLY newline expressions RCURLY newline .)
+    FALSE           reduce using rule 24 (function -> FUNC IDENTIFIER LPAREN RPAREN MAP_TO type LCURLY newline expressions RCURLY newline .)
+    CLFLOAT         reduce using rule 24 (function -> FUNC IDENTIFIER LPAREN RPAREN MAP_TO type LCURLY newline expressions RCURLY newline .)
+    CLSTRING        reduce using rule 24 (function -> FUNC IDENTIFIER LPAREN RPAREN MAP_TO type LCURLY newline expressions RCURLY newline .)
+
+
+state 69
+
+    (23) function -> FUNC IDENTIFIER LPAREN funcassigns RPAREN MAP_TO type LCURLY newline expressions RCURLY . newline
+
+    newline         shift and go to state 70
+
+
+state 70
+
+    (23) function -> FUNC IDENTIFIER LPAREN funcassigns RPAREN MAP_TO type LCURLY newline expressions RCURLY newline .
+
+    newline         reduce using rule 23 (function -> FUNC IDENTIFIER LPAREN funcassigns RPAREN MAP_TO type LCURLY newline expressions RCURLY newline .)
+    FUNC            reduce using rule 23 (function -> FUNC IDENTIFIER LPAREN funcassigns RPAREN MAP_TO type LCURLY newline expressions RCURLY newline .)
+    VAR             reduce using rule 23 (function -> FUNC IDENTIFIER LPAREN funcassigns RPAREN MAP_TO type LCURLY newline expressions RCURLY newline .)
+    LET             reduce using rule 23 (function -> FUNC IDENTIFIER LPAREN funcassigns RPAREN MAP_TO type LCURLY newline expressions RCURLY newline .)
+    LPAREN          reduce using rule 23 (function -> FUNC IDENTIFIER LPAREN funcassigns RPAREN MAP_TO type LCURLY newline expressions RCURLY newline .)
+    INTEGER         reduce using rule 23 (function -> FUNC IDENTIFIER LPAREN funcassigns RPAREN MAP_TO type LCURLY newline expressions RCURLY newline .)
+    IDENTIFIER      reduce using rule 23 (function -> FUNC IDENTIFIER LPAREN funcassigns RPAREN MAP_TO type LCURLY newline expressions RCURLY newline .)
+    TRUE            reduce using rule 23 (function -> FUNC IDENTIFIER LPAREN funcassigns RPAREN MAP_TO type LCURLY newline expressions RCURLY newline .)
+    FALSE           reduce using rule 23 (function -> FUNC IDENTIFIER LPAREN funcassigns RPAREN MAP_TO type LCURLY newline expressions RCURLY newline .)
+    CLFLOAT         reduce using rule 23 (function -> FUNC IDENTIFIER LPAREN funcassigns RPAREN MAP_TO type LCURLY newline expressions RCURLY newline .)
+    CLSTRING        reduce using rule 23 (function -> FUNC IDENTIFIER LPAREN funcassigns RPAREN MAP_TO type LCURLY newline expressions RCURLY newline .)
 
 WARNING: 
 WARNING: Conflicts:
 WARNING: 
-WARNING: shift/reduce conflict for SIMB in state 14 resolved as shift
-WARNING: shift/reduce conflict for NUM in state 14 resolved as shift
-WARNING: shift/reduce conflict for TEXT in state 14 resolved as shift
-WARNING: shift/reduce conflict for SIMB in state 14 resolved as shift
-WARNING: shift/reduce conflict for NUM in state 14 resolved as shift
-WARNING: shift/reduce conflict for TEXT in state 14 resolved as shift
-WARNING: shift/reduce conflict for NIL in state 14 resolved as shift
-WARNING: shift/reduce conflict for QUOTE in state 14 resolved as shift
-WARNING: shift/reduce conflict for LPAREN in state 14 resolved as shift
-WARNING: shift/reduce conflict for TRUE in state 14 resolved as shift
-WARNING: shift/reduce conflict for FALSE in state 14 resolved as shift
-WARNING: shift/reduce conflict for SIMB in state 16 resolved as shift
-WARNING: shift/reduce conflict for NUM in state 16 resolved as shift
-WARNING: shift/reduce conflict for TEXT in state 16 resolved as shift
-WARNING: shift/reduce conflict for SIMB in state 16 resolved as shift
-WARNING: shift/reduce conflict for NUM in state 16 resolved as shift
-WARNING: shift/reduce conflict for TEXT in state 16 resolved as shift
-WARNING: shift/reduce conflict for NIL in state 16 resolved as shift
-WARNING: shift/reduce conflict for QUOTE in state 16 resolved as shift
-WARNING: shift/reduce conflict for LPAREN in state 16 resolved as shift
-WARNING: shift/reduce conflict for TRUE in state 16 resolved as shift
-WARNING: shift/reduce conflict for FALSE in state 16 resolved as shift
-WARNING: shift/reduce conflict for SIMB in state 17 resolved as shift
-WARNING: shift/reduce conflict for NUM in state 17 resolved as shift
-WARNING: shift/reduce conflict for TEXT in state 17 resolved as shift
-WARNING: shift/reduce conflict for SIMB in state 17 resolved as shift
-WARNING: shift/reduce conflict for NUM in state 17 resolved as shift
-WARNING: shift/reduce conflict for TEXT in state 17 resolved as shift
-WARNING: shift/reduce conflict for NIL in state 17 resolved as shift
-WARNING: shift/reduce conflict for QUOTE in state 17 resolved as shift
-WARNING: shift/reduce conflict for LPAREN in state 17 resolved as shift
-WARNING: shift/reduce conflict for TRUE in stat
+WARNING: reduce/reduce conflict in state 7 resolved using rule (statement -> literal)
+WARNING: rejected rule (primary -> literal) in state 7

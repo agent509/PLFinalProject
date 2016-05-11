@@ -1,3 +1,1 @@
-rm parsetab.py
-rm parser.out
-rm *class
+rm parser.out parsetab.py *.class
