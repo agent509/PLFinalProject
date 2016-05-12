@@ -1,3 +1,5 @@
 let a = 5
 let b = 7
 Print((a+10)*b)
+let c = 'testing'
+print(c)

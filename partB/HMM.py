@@ -158,9 +158,9 @@ def p_statement(p):
                  | literal'''
     p[0]=p[1]
 
-#def p_str(p):
-#    '''str : SQUOTE strexps SQUOTE'''
-#    p[0] = p[1]
+def p_str(p):
+    '''str : SQUOTE IDENTIFIER SQUOTE'''
+    p[0] = p[2]
 #
 #def p_strexps(p):
 #    '''strexps : strexp
@@ -241,7 +241,7 @@ def p_literal(p):
                | TRUE
                | FALSE
                | CLFLOAT
-               | CLSTRING'''
+               | str'''
     p[0] = p[1]
 
 def emptyline(self):
