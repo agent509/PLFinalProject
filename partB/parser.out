@@ -2,39 +2,39 @@ Created by PLY version 3.8 (http://www.dabeaz.com/ply)
 
 Unused terminals:
 
-    FUNC
-    GT_OP
-    VOID
-    BACKSLASH
-    LCURLY
-    WHILE
-    COLON
-    EQ_OP
-    RETURN
-    STRING
-    SEMI
-    RCURLY
-    ELEM
-    OR_OP
-    PIPE
-    PRCNT
-    COMMA
-    RBRACE
-    FOR
-    ELSE
-    AND_OP
-    BANG
-    GE_OP
-    VAR
-    LE_OP
-    IF
-    LBRACE
-    SQUOTE
-    IFF
-    LT_OP
-    MAP_TO
     NE_OP
+    VAR
+    PRCNT
+    PIPE
+    BACKSLASH
+    ELSE
+    IF
+    EQ_OP
+    BANG
+    LE_OP
+    FOR
+    LT_OP
     LAMBDA
+    ELEM
+    RBRACE
+    VOID
+    AND_OP
+    LBRACE
+    MAP_TO
+    OR_OP
+    SEMI
+    IFF
+    RETURN
+    SQUOTE
+    RCURLY
+    COMMA
+    GT_OP
+    FUNC
+    LCURLY
+    COLON
+    GE_OP
+    STRING
+    WHILE
 
 Grammar
 
@@ -165,309 +165,32 @@ state 0
     (27) literal -> . CLFLOAT
     (28) literal -> . CLSTRING
 
-    PRINT           shift and go to state 4
-    LET             shift and go to state 15
-    LPAREN          shift and go to state 13
-    INTEGER         shift and go to state 11
-    IDENTIFIER      shift and go to state 12
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 14
-    CLFLOAT         shift and go to state 3
-    CLSTRING        shift and go to state 1
+    PRINT           shift and go to state 1
+    LET             shift and go to state 11
+    LPAREN          shift and go to state 3
+    INTEGER         shift and go to state 16
+    IDENTIFIER      shift and go to state 13
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    CLFLOAT         shift and go to state 14
+    CLSTRING        shift and go to state 5
 
-    primary                        shift and go to state 2
+    expression                     shift and go to state 2
+    program                        shift and go to state 6
+    expressions                    shift and go to state 7
     literal                        shift and go to state 8
-    program                        shift and go to state 9
+    letdeclarations                shift and go to state 9
     statement                      shift and go to state 10
-    expressions                    shift and go to state 6
-    expression                     shift and go to state 16
-    letdeclarations                shift and go to state 7
+    primary                        shift and go to state 15
 
 state 1
 
-    (28) literal -> CLSTRING .
+    (2) expression -> PRINT . LPAREN expression RPAREN
 
-    PLUS            reduce using rule 28 (literal -> CLSTRING .)
-    MINUS           reduce using rule 28 (literal -> CLSTRING .)
-    MULT            reduce using rule 28 (literal -> CLSTRING .)
-    DIV             reduce using rule 28 (literal -> CLSTRING .)
-    newline         reduce using rule 28 (literal -> CLSTRING .)
-    PRINT           reduce using rule 28 (literal -> CLSTRING .)
-    LET             reduce using rule 28 (literal -> CLSTRING .)
-    LPAREN          reduce using rule 28 (literal -> CLSTRING .)
-    INTEGER         reduce using rule 28 (literal -> CLSTRING .)
-    IDENTIFIER      reduce using rule 28 (literal -> CLSTRING .)
-    TRUE            reduce using rule 28 (literal -> CLSTRING .)
-    FALSE           reduce using rule 28 (literal -> CLSTRING .)
-    CLFLOAT         reduce using rule 28 (literal -> CLSTRING .)
-    CLSTRING        reduce using rule 28 (literal -> CLSTRING .)
-    RPAREN          reduce using rule 28 (literal -> CLSTRING .)
+    LPAREN          shift and go to state 17
 
 
 state 2
-
-    (8) statement -> primary .
-    (10) primary -> primary . PLUS primary
-    (11) primary -> primary . MINUS primary
-    (12) primary -> primary . MULT primary
-    (13) primary -> primary . DIV primary
-
-    RPAREN          reduce using rule 8 (statement -> primary .)
-    newline         reduce using rule 8 (statement -> primary .)
-    PRINT           reduce using rule 8 (statement -> primary .)
-    LET             reduce using rule 8 (statement -> primary .)
-    LPAREN          reduce using rule 8 (statement -> primary .)
-    INTEGER         reduce using rule 8 (statement -> primary .)
-    IDENTIFIER      reduce using rule 8 (statement -> primary .)
-    TRUE            reduce using rule 8 (statement -> primary .)
-    FALSE           reduce using rule 8 (statement -> primary .)
-    CLFLOAT         reduce using rule 8 (statement -> primary .)
-    CLSTRING        reduce using rule 8 (statement -> primary .)
-    PLUS            shift and go to state 18
-    MINUS           shift and go to state 20
-    MULT            shift and go to state 19
-    DIV             shift and go to state 17
-
-
-state 3
-
-    (27) literal -> CLFLOAT .
-
-    PLUS            reduce using rule 27 (literal -> CLFLOAT .)
-    MINUS           reduce using rule 27 (literal -> CLFLOAT .)
-    MULT            reduce using rule 27 (literal -> CLFLOAT .)
-    DIV             reduce using rule 27 (literal -> CLFLOAT .)
-    newline         reduce using rule 27 (literal -> CLFLOAT .)
-    PRINT           reduce using rule 27 (literal -> CLFLOAT .)
-    LET             reduce using rule 27 (literal -> CLFLOAT .)
-    LPAREN          reduce using rule 27 (literal -> CLFLOAT .)
-    INTEGER         reduce using rule 27 (literal -> CLFLOAT .)
-    IDENTIFIER      reduce using rule 27 (literal -> CLFLOAT .)
-    TRUE            reduce using rule 27 (literal -> CLFLOAT .)
-    FALSE           reduce using rule 27 (literal -> CLFLOAT .)
-    CLFLOAT         reduce using rule 27 (literal -> CLFLOAT .)
-    CLSTRING        reduce using rule 27 (literal -> CLFLOAT .)
-    RPAREN          reduce using rule 27 (literal -> CLFLOAT .)
-
-
-state 4
-
-    (2) expression -> PRINT . LPAREN expression RPAREN
-
-    LPAREN          shift and go to state 21
-
-
-state 5
-
-    (25) literal -> TRUE .
-
-    PLUS            reduce using rule 25 (literal -> TRUE .)
-    MINUS           reduce using rule 25 (literal -> TRUE .)
-    MULT            reduce using rule 25 (literal -> TRUE .)
-    DIV             reduce using rule 25 (literal -> TRUE .)
-    newline         reduce using rule 25 (literal -> TRUE .)
-    PRINT           reduce using rule 25 (literal -> TRUE .)
-    LET             reduce using rule 25 (literal -> TRUE .)
-    LPAREN          reduce using rule 25 (literal -> TRUE .)
-    INTEGER         reduce using rule 25 (literal -> TRUE .)
-    IDENTIFIER      reduce using rule 25 (literal -> TRUE .)
-    TRUE            reduce using rule 25 (literal -> TRUE .)
-    FALSE           reduce using rule 25 (literal -> TRUE .)
-    CLFLOAT         reduce using rule 25 (literal -> TRUE .)
-    CLSTRING        reduce using rule 25 (literal -> TRUE .)
-    RPAREN          reduce using rule 25 (literal -> TRUE .)
-
-
-state 6
-
-    (1) program -> expressions .
-
-    $end            reduce using rule 1 (program -> expressions .)
-
-
-state 7
-
-    (7) expression -> letdeclarations .
-
-    newline         reduce using rule 7 (expression -> letdeclarations .)
-    PRINT           reduce using rule 7 (expression -> letdeclarations .)
-    LET             reduce using rule 7 (expression -> letdeclarations .)
-    LPAREN          reduce using rule 7 (expression -> letdeclarations .)
-    INTEGER         reduce using rule 7 (expression -> letdeclarations .)
-    IDENTIFIER      reduce using rule 7 (expression -> letdeclarations .)
-    TRUE            reduce using rule 7 (expression -> letdeclarations .)
-    FALSE           reduce using rule 7 (expression -> letdeclarations .)
-    CLFLOAT         reduce using rule 7 (expression -> letdeclarations .)
-    CLSTRING        reduce using rule 7 (expression -> letdeclarations .)
-    RPAREN          reduce using rule 7 (expression -> letdeclarations .)
-
-
-state 8
-
-    (9) statement -> literal .
-    (15) primary -> literal .
-
-  ! reduce/reduce conflict for RPAREN resolved using rule 9 (statement -> literal .)
-  ! reduce/reduce conflict for newline resolved using rule 9 (statement -> literal .)
-  ! reduce/reduce conflict for PRINT resolved using rule 9 (statement -> literal .)
-  ! reduce/reduce conflict for LET resolved using rule 9 (statement -> literal .)
-  ! reduce/reduce conflict for LPAREN resolved using rule 9 (statement -> literal .)
-  ! reduce/reduce conflict for INTEGER resolved using rule 9 (statement -> literal .)
-  ! reduce/reduce conflict for IDENTIFIER resolved using rule 9 (statement -> literal .)
-  ! reduce/reduce conflict for TRUE resolved using rule 9 (statement -> literal .)
-  ! reduce/reduce conflict for FALSE resolved using rule 9 (statement -> literal .)
-  ! reduce/reduce conflict for CLFLOAT resolved using rule 9 (statement -> literal .)
-  ! reduce/reduce conflict for CLSTRING resolved using rule 9 (statement -> literal .)
-    RPAREN          reduce using rule 9 (statement -> literal .)
-    newline         reduce using rule 9 (statement -> literal .)
-    PRINT           reduce using rule 9 (statement -> literal .)
-    LET             reduce using rule 9 (statement -> literal .)
-    LPAREN          reduce using rule 9 (statement -> literal .)
-    INTEGER         reduce using rule 9 (statement -> literal .)
-    IDENTIFIER      reduce using rule 9 (statement -> literal .)
-    TRUE            reduce using rule 9 (statement -> literal .)
-    FALSE           reduce using rule 9 (statement -> literal .)
-    CLFLOAT         reduce using rule 9 (statement -> literal .)
-    CLSTRING        reduce using rule 9 (statement -> literal .)
-    PLUS            reduce using rule 15 (primary -> literal .)
-    MINUS           reduce using rule 15 (primary -> literal .)
-    MULT            reduce using rule 15 (primary -> literal .)
-    DIV             reduce using rule 15 (primary -> literal .)
-
-  ! RPAREN          [ reduce using rule 15 (primary -> literal .) ]
-  ! newline         [ reduce using rule 15 (primary -> literal .) ]
-  ! PRINT           [ reduce using rule 15 (primary -> literal .) ]
-  ! LET             [ reduce using rule 15 (primary -> literal .) ]
-  ! LPAREN          [ reduce using rule 15 (primary -> literal .) ]
-  ! INTEGER         [ reduce using rule 15 (primary -> literal .) ]
-  ! IDENTIFIER      [ reduce using rule 15 (primary -> literal .) ]
-  ! TRUE            [ reduce using rule 15 (primary -> literal .) ]
-  ! FALSE           [ reduce using rule 15 (primary -> literal .) ]
-  ! CLFLOAT         [ reduce using rule 15 (primary -> literal .) ]
-  ! CLSTRING        [ reduce using rule 15 (primary -> literal .) ]
-
-
-state 9
-
-    (0) S' -> program .
-
-
-
-state 10
-
-    (6) expression -> statement .
-
-    newline         reduce using rule 6 (expression -> statement .)
-    PRINT           reduce using rule 6 (expression -> statement .)
-    LET             reduce using rule 6 (expression -> statement .)
-    LPAREN          reduce using rule 6 (expression -> statement .)
-    INTEGER         reduce using rule 6 (expression -> statement .)
-    IDENTIFIER      reduce using rule 6 (expression -> statement .)
-    TRUE            reduce using rule 6 (expression -> statement .)
-    FALSE           reduce using rule 6 (expression -> statement .)
-    CLFLOAT         reduce using rule 6 (expression -> statement .)
-    CLSTRING        reduce using rule 6 (expression -> statement .)
-    RPAREN          reduce using rule 6 (expression -> statement .)
-
-
-state 11
-
-    (23) literal -> INTEGER .
-
-    PLUS            reduce using rule 23 (literal -> INTEGER .)
-    MINUS           reduce using rule 23 (literal -> INTEGER .)
-    MULT            reduce using rule 23 (literal -> INTEGER .)
-    DIV             reduce using rule 23 (literal -> INTEGER .)
-    newline         reduce using rule 23 (literal -> INTEGER .)
-    PRINT           reduce using rule 23 (literal -> INTEGER .)
-    LET             reduce using rule 23 (literal -> INTEGER .)
-    LPAREN          reduce using rule 23 (literal -> INTEGER .)
-    INTEGER         reduce using rule 23 (literal -> INTEGER .)
-    IDENTIFIER      reduce using rule 23 (literal -> INTEGER .)
-    TRUE            reduce using rule 23 (literal -> INTEGER .)
-    FALSE           reduce using rule 23 (literal -> INTEGER .)
-    CLFLOAT         reduce using rule 23 (literal -> INTEGER .)
-    CLSTRING        reduce using rule 23 (literal -> INTEGER .)
-    RPAREN          reduce using rule 23 (literal -> INTEGER .)
-
-
-state 12
-
-    (24) literal -> IDENTIFIER .
-
-    PLUS            reduce using rule 24 (literal -> IDENTIFIER .)
-    MINUS           reduce using rule 24 (literal -> IDENTIFIER .)
-    MULT            reduce using rule 24 (literal -> IDENTIFIER .)
-    DIV             reduce using rule 24 (literal -> IDENTIFIER .)
-    newline         reduce using rule 24 (literal -> IDENTIFIER .)
-    PRINT           reduce using rule 24 (literal -> IDENTIFIER .)
-    LET             reduce using rule 24 (literal -> IDENTIFIER .)
-    LPAREN          reduce using rule 24 (literal -> IDENTIFIER .)
-    INTEGER         reduce using rule 24 (literal -> IDENTIFIER .)
-    IDENTIFIER      reduce using rule 24 (literal -> IDENTIFIER .)
-    TRUE            reduce using rule 24 (literal -> IDENTIFIER .)
-    FALSE           reduce using rule 24 (literal -> IDENTIFIER .)
-    CLFLOAT         reduce using rule 24 (literal -> IDENTIFIER .)
-    CLSTRING        reduce using rule 24 (literal -> IDENTIFIER .)
-    RPAREN          reduce using rule 24 (literal -> IDENTIFIER .)
-
-
-state 13
-
-    (14) primary -> LPAREN . primary RPAREN
-    (10) primary -> . primary PLUS primary
-    (11) primary -> . primary MINUS primary
-    (12) primary -> . primary MULT primary
-    (13) primary -> . primary DIV primary
-    (14) primary -> . LPAREN primary RPAREN
-    (15) primary -> . literal
-    (23) literal -> . INTEGER
-    (24) literal -> . IDENTIFIER
-    (25) literal -> . TRUE
-    (26) literal -> . FALSE
-    (27) literal -> . CLFLOAT
-    (28) literal -> . CLSTRING
-
-    LPAREN          shift and go to state 13
-    INTEGER         shift and go to state 11
-    IDENTIFIER      shift and go to state 12
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 14
-    CLFLOAT         shift and go to state 3
-    CLSTRING        shift and go to state 1
-
-    literal                        shift and go to state 23
-    primary                        shift and go to state 22
-
-state 14
-
-    (26) literal -> FALSE .
-
-    PLUS            reduce using rule 26 (literal -> FALSE .)
-    MINUS           reduce using rule 26 (literal -> FALSE .)
-    MULT            reduce using rule 26 (literal -> FALSE .)
-    DIV             reduce using rule 26 (literal -> FALSE .)
-    newline         reduce using rule 26 (literal -> FALSE .)
-    PRINT           reduce using rule 26 (literal -> FALSE .)
-    LET             reduce using rule 26 (literal -> FALSE .)
-    LPAREN          reduce using rule 26 (literal -> FALSE .)
-    INTEGER         reduce using rule 26 (literal -> FALSE .)
-    IDENTIFIER      reduce using rule 26 (literal -> FALSE .)
-    TRUE            reduce using rule 26 (literal -> FALSE .)
-    FALSE           reduce using rule 26 (literal -> FALSE .)
-    CLFLOAT         reduce using rule 26 (literal -> FALSE .)
-    CLSTRING        reduce using rule 26 (literal -> FALSE .)
-    RPAREN          reduce using rule 26 (literal -> FALSE .)
-
-
-state 15
-
-    (5) letdeclarations -> LET . IDENTIFIER EQUALS expression
-
-    IDENTIFIER      shift and go to state 24
-
-
-state 16
 
     (3) expressions -> expression . newline
     (4) expressions -> expression . expressions
@@ -492,133 +215,302 @@ state 16
     (27) literal -> . CLFLOAT
     (28) literal -> . CLSTRING
 
-    newline         shift and go to state 26
-    PRINT           shift and go to state 4
-    LET             shift and go to state 15
-    LPAREN          shift and go to state 13
-    INTEGER         shift and go to state 11
-    IDENTIFIER      shift and go to state 12
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 14
-    CLFLOAT         shift and go to state 3
-    CLSTRING        shift and go to state 1
+    newline         shift and go to state 19
+    PRINT           shift and go to state 1
+    LET             shift and go to state 11
+    LPAREN          shift and go to state 3
+    INTEGER         shift and go to state 16
+    IDENTIFIER      shift and go to state 13
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    CLFLOAT         shift and go to state 14
+    CLSTRING        shift and go to state 5
 
-    primary                        shift and go to state 2
+    expression                     shift and go to state 2
+    expressions                    shift and go to state 18
     literal                        shift and go to state 8
+    letdeclarations                shift and go to state 9
     statement                      shift and go to state 10
-    expressions                    shift and go to state 25
-    expression                     shift and go to state 16
-    letdeclarations                shift and go to state 7
+    primary                        shift and go to state 15
+
+state 3
+
+    (14) primary -> LPAREN . primary RPAREN
+    (10) primary -> . primary PLUS primary
+    (11) primary -> . primary MINUS primary
+    (12) primary -> . primary MULT primary
+    (13) primary -> . primary DIV primary
+    (14) primary -> . LPAREN primary RPAREN
+    (15) primary -> . literal
+    (23) literal -> . INTEGER
+    (24) literal -> . IDENTIFIER
+    (25) literal -> . TRUE
+    (26) literal -> . FALSE
+    (27) literal -> . CLFLOAT
+    (28) literal -> . CLSTRING
+
+    LPAREN          shift and go to state 3
+    INTEGER         shift and go to state 16
+    IDENTIFIER      shift and go to state 13
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    CLFLOAT         shift and go to state 14
+    CLSTRING        shift and go to state 5
+
+    literal                        shift and go to state 20
+    primary                        shift and go to state 21
+
+state 4
+
+    (25) literal -> TRUE .
+
+    RPAREN          reduce using rule 25 (literal -> TRUE .)
+    PLUS            reduce using rule 25 (literal -> TRUE .)
+    MINUS           reduce using rule 25 (literal -> TRUE .)
+    MULT            reduce using rule 25 (literal -> TRUE .)
+    DIV             reduce using rule 25 (literal -> TRUE .)
+    newline         reduce using rule 25 (literal -> TRUE .)
+    PRINT           reduce using rule 25 (literal -> TRUE .)
+    LET             reduce using rule 25 (literal -> TRUE .)
+    LPAREN          reduce using rule 25 (literal -> TRUE .)
+    INTEGER         reduce using rule 25 (literal -> TRUE .)
+    IDENTIFIER      reduce using rule 25 (literal -> TRUE .)
+    TRUE            reduce using rule 25 (literal -> TRUE .)
+    FALSE           reduce using rule 25 (literal -> TRUE .)
+    CLFLOAT         reduce using rule 25 (literal -> TRUE .)
+    CLSTRING        reduce using rule 25 (literal -> TRUE .)
+
+
+state 5
+
+    (28) literal -> CLSTRING .
+
+    RPAREN          reduce using rule 28 (literal -> CLSTRING .)
+    PLUS            reduce using rule 28 (literal -> CLSTRING .)
+    MINUS           reduce using rule 28 (literal -> CLSTRING .)
+    MULT            reduce using rule 28 (literal -> CLSTRING .)
+    DIV             reduce using rule 28 (literal -> CLSTRING .)
+    newline         reduce using rule 28 (literal -> CLSTRING .)
+    PRINT           reduce using rule 28 (literal -> CLSTRING .)
+    LET             reduce using rule 28 (literal -> CLSTRING .)
+    LPAREN          reduce using rule 28 (literal -> CLSTRING .)
+    INTEGER         reduce using rule 28 (literal -> CLSTRING .)
+    IDENTIFIER      reduce using rule 28 (literal -> CLSTRING .)
+    TRUE            reduce using rule 28 (literal -> CLSTRING .)
+    FALSE           reduce using rule 28 (literal -> CLSTRING .)
+    CLFLOAT         reduce using rule 28 (literal -> CLSTRING .)
+    CLSTRING        reduce using rule 28 (literal -> CLSTRING .)
+
+
+state 6
+
+    (0) S' -> program .
+
+
+
+state 7
+
+    (1) program -> expressions .
+
+    $end            reduce using rule 1 (program -> expressions .)
+
+
+state 8
+
+    (9) statement -> literal .
+    (15) primary -> literal .
+
+  ! reduce/reduce conflict for newline resolved using rule 9 (statement -> literal .)
+  ! reduce/reduce conflict for PRINT resolved using rule 9 (statement -> literal .)
+  ! reduce/reduce conflict for LET resolved using rule 9 (statement -> literal .)
+  ! reduce/reduce conflict for LPAREN resolved using rule 9 (statement -> literal .)
+  ! reduce/reduce conflict for INTEGER resolved using rule 9 (statement -> literal .)
+  ! reduce/reduce conflict for IDENTIFIER resolved using rule 9 (statement -> literal .)
+  ! reduce/reduce conflict for TRUE resolved using rule 9 (statement -> literal .)
+  ! reduce/reduce conflict for FALSE resolved using rule 9 (statement -> literal .)
+  ! reduce/reduce conflict for CLFLOAT resolved using rule 9 (statement -> literal .)
+  ! reduce/reduce conflict for CLSTRING resolved using rule 9 (statement -> literal .)
+  ! reduce/reduce conflict for RPAREN resolved using rule 9 (statement -> literal .)
+    RPAREN          reduce using rule 9 (statement -> literal .)
+    newline         reduce using rule 9 (statement -> literal .)
+    PRINT           reduce using rule 9 (statement -> literal .)
+    LET             reduce using rule 9 (statement -> literal .)
+    LPAREN          reduce using rule 9 (statement -> literal .)
+    INTEGER         reduce using rule 9 (statement -> literal .)
+    IDENTIFIER      reduce using rule 9 (statement -> literal .)
+    TRUE            reduce using rule 9 (statement -> literal .)
+    FALSE           reduce using rule 9 (statement -> literal .)
+    CLFLOAT         reduce using rule 9 (statement -> literal .)
+    CLSTRING        reduce using rule 9 (statement -> literal .)
+    PLUS            reduce using rule 15 (primary -> literal .)
+    MINUS           reduce using rule 15 (primary -> literal .)
+    MULT            reduce using rule 15 (primary -> literal .)
+    DIV             reduce using rule 15 (primary -> literal .)
+
+  ! newline         [ reduce using rule 15 (primary -> literal .) ]
+  ! PRINT           [ reduce using rule 15 (primary -> literal .) ]
+  ! LET             [ reduce using rule 15 (primary -> literal .) ]
+  ! LPAREN          [ reduce using rule 15 (primary -> literal .) ]
+  ! INTEGER         [ reduce using rule 15 (primary -> literal .) ]
+  ! IDENTIFIER      [ reduce using rule 15 (primary -> literal .) ]
+  ! TRUE            [ reduce using rule 15 (primary -> literal .) ]
+  ! FALSE           [ reduce using rule 15 (primary -> literal .) ]
+  ! CLFLOAT         [ reduce using rule 15 (primary -> literal .) ]
+  ! CLSTRING        [ reduce using rule 15 (primary -> literal .) ]
+  ! RPAREN          [ reduce using rule 15 (primary -> literal .) ]
+
+
+state 9
+
+    (7) expression -> letdeclarations .
+
+    newline         reduce using rule 7 (expression -> letdeclarations .)
+    PRINT           reduce using rule 7 (expression -> letdeclarations .)
+    LET             reduce using rule 7 (expression -> letdeclarations .)
+    LPAREN          reduce using rule 7 (expression -> letdeclarations .)
+    INTEGER         reduce using rule 7 (expression -> letdeclarations .)
+    IDENTIFIER      reduce using rule 7 (expression -> letdeclarations .)
+    TRUE            reduce using rule 7 (expression -> letdeclarations .)
+    FALSE           reduce using rule 7 (expression -> letdeclarations .)
+    CLFLOAT         reduce using rule 7 (expression -> letdeclarations .)
+    CLSTRING        reduce using rule 7 (expression -> letdeclarations .)
+    RPAREN          reduce using rule 7 (expression -> letdeclarations .)
+
+
+state 10
+
+    (6) expression -> statement .
+
+    newline         reduce using rule 6 (expression -> statement .)
+    PRINT           reduce using rule 6 (expression -> statement .)
+    LET             reduce using rule 6 (expression -> statement .)
+    LPAREN          reduce using rule 6 (expression -> statement .)
+    INTEGER         reduce using rule 6 (expression -> statement .)
+    IDENTIFIER      reduce using rule 6 (expression -> statement .)
+    TRUE            reduce using rule 6 (expression -> statement .)
+    FALSE           reduce using rule 6 (expression -> statement .)
+    CLFLOAT         reduce using rule 6 (expression -> statement .)
+    CLSTRING        reduce using rule 6 (expression -> statement .)
+    RPAREN          reduce using rule 6 (expression -> statement .)
+
+
+state 11
+
+    (5) letdeclarations -> LET . IDENTIFIER EQUALS expression
+
+    IDENTIFIER      shift and go to state 22
+
+
+state 12
+
+    (26) literal -> FALSE .
+
+    RPAREN          reduce using rule 26 (literal -> FALSE .)
+    PLUS            reduce using rule 26 (literal -> FALSE .)
+    MINUS           reduce using rule 26 (literal -> FALSE .)
+    MULT            reduce using rule 26 (literal -> FALSE .)
+    DIV             reduce using rule 26 (literal -> FALSE .)
+    newline         reduce using rule 26 (literal -> FALSE .)
+    PRINT           reduce using rule 26 (literal -> FALSE .)
+    LET             reduce using rule 26 (literal -> FALSE .)
+    LPAREN          reduce using rule 26 (literal -> FALSE .)
+    INTEGER         reduce using rule 26 (literal -> FALSE .)
+    IDENTIFIER      reduce using rule 26 (literal -> FALSE .)
+    TRUE            reduce using rule 26 (literal -> FALSE .)
+    FALSE           reduce using rule 26 (literal -> FALSE .)
+    CLFLOAT         reduce using rule 26 (literal -> FALSE .)
+    CLSTRING        reduce using rule 26 (literal -> FALSE .)
+
+
+state 13
+
+    (24) literal -> IDENTIFIER .
+
+    RPAREN          reduce using rule 24 (literal -> IDENTIFIER .)
+    PLUS            reduce using rule 24 (literal -> IDENTIFIER .)
+    MINUS           reduce using rule 24 (literal -> IDENTIFIER .)
+    MULT            reduce using rule 24 (literal -> IDENTIFIER .)
+    DIV             reduce using rule 24 (literal -> IDENTIFIER .)
+    newline         reduce using rule 24 (literal -> IDENTIFIER .)
+    PRINT           reduce using rule 24 (literal -> IDENTIFIER .)
+    LET             reduce using rule 24 (literal -> IDENTIFIER .)
+    LPAREN          reduce using rule 24 (literal -> IDENTIFIER .)
+    INTEGER         reduce using rule 24 (literal -> IDENTIFIER .)
+    IDENTIFIER      reduce using rule 24 (literal -> IDENTIFIER .)
+    TRUE            reduce using rule 24 (literal -> IDENTIFIER .)
+    FALSE           reduce using rule 24 (literal -> IDENTIFIER .)
+    CLFLOAT         reduce using rule 24 (literal -> IDENTIFIER .)
+    CLSTRING        reduce using rule 24 (literal -> IDENTIFIER .)
+
+
+state 14
+
+    (27) literal -> CLFLOAT .
+
+    RPAREN          reduce using rule 27 (literal -> CLFLOAT .)
+    PLUS            reduce using rule 27 (literal -> CLFLOAT .)
+    MINUS           reduce using rule 27 (literal -> CLFLOAT .)
+    MULT            reduce using rule 27 (literal -> CLFLOAT .)
+    DIV             reduce using rule 27 (literal -> CLFLOAT .)
+    newline         reduce using rule 27 (literal -> CLFLOAT .)
+    PRINT           reduce using rule 27 (literal -> CLFLOAT .)
+    LET             reduce using rule 27 (literal -> CLFLOAT .)
+    LPAREN          reduce using rule 27 (literal -> CLFLOAT .)
+    INTEGER         reduce using rule 27 (literal -> CLFLOAT .)
+    IDENTIFIER      reduce using rule 27 (literal -> CLFLOAT .)
+    TRUE            reduce using rule 27 (literal -> CLFLOAT .)
+    FALSE           reduce using rule 27 (literal -> CLFLOAT .)
+    CLFLOAT         reduce using rule 27 (literal -> CLFLOAT .)
+    CLSTRING        reduce using rule 27 (literal -> CLFLOAT .)
+
+
+state 15
+
+    (8) statement -> primary .
+    (10) primary -> primary . PLUS primary
+    (11) primary -> primary . MINUS primary
+    (12) primary -> primary . MULT primary
+    (13) primary -> primary . DIV primary
+
+    RPAREN          reduce using rule 8 (statement -> primary .)
+    newline         reduce using rule 8 (statement -> primary .)
+    PRINT           reduce using rule 8 (statement -> primary .)
+    LET             reduce using rule 8 (statement -> primary .)
+    LPAREN          reduce using rule 8 (statement -> primary .)
+    INTEGER         reduce using rule 8 (statement -> primary .)
+    IDENTIFIER      reduce using rule 8 (statement -> primary .)
+    TRUE            reduce using rule 8 (statement -> primary .)
+    FALSE           reduce using rule 8 (statement -> primary .)
+    CLFLOAT         reduce using rule 8 (statement -> primary .)
+    CLSTRING        reduce using rule 8 (statement -> primary .)
+    PLUS            shift and go to state 26
+    MINUS           shift and go to state 23
+    MULT            shift and go to state 25
+    DIV             shift and go to state 24
+
+
+state 16
+
+    (23) literal -> INTEGER .
+
+    RPAREN          reduce using rule 23 (literal -> INTEGER .)
+    PLUS            reduce using rule 23 (literal -> INTEGER .)
+    MINUS           reduce using rule 23 (literal -> INTEGER .)
+    MULT            reduce using rule 23 (literal -> INTEGER .)
+    DIV             reduce using rule 23 (literal -> INTEGER .)
+    newline         reduce using rule 23 (literal -> INTEGER .)
+    PRINT           reduce using rule 23 (literal -> INTEGER .)
+    LET             reduce using rule 23 (literal -> INTEGER .)
+    LPAREN          reduce using rule 23 (literal -> INTEGER .)
+    INTEGER         reduce using rule 23 (literal -> INTEGER .)
+    IDENTIFIER      reduce using rule 23 (literal -> INTEGER .)
+    TRUE            reduce using rule 23 (literal -> INTEGER .)
+    FALSE           reduce using rule 23 (literal -> INTEGER .)
+    CLFLOAT         reduce using rule 23 (literal -> INTEGER .)
+    CLSTRING        reduce using rule 23 (literal -> INTEGER .)
+
 
 state 17
-
-    (13) primary -> primary DIV . primary
-    (10) primary -> . primary PLUS primary
-    (11) primary -> . primary MINUS primary
-    (12) primary -> . primary MULT primary
-    (13) primary -> . primary DIV primary
-    (14) primary -> . LPAREN primary RPAREN
-    (15) primary -> . literal
-    (23) literal -> . INTEGER
-    (24) literal -> . IDENTIFIER
-    (25) literal -> . TRUE
-    (26) literal -> . FALSE
-    (27) literal -> . CLFLOAT
-    (28) literal -> . CLSTRING
-
-    LPAREN          shift and go to state 13
-    INTEGER         shift and go to state 11
-    IDENTIFIER      shift and go to state 12
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 14
-    CLFLOAT         shift and go to state 3
-    CLSTRING        shift and go to state 1
-
-    literal                        shift and go to state 23
-    primary                        shift and go to state 27
-
-state 18
-
-    (10) primary -> primary PLUS . primary
-    (10) primary -> . primary PLUS primary
-    (11) primary -> . primary MINUS primary
-    (12) primary -> . primary MULT primary
-    (13) primary -> . primary DIV primary
-    (14) primary -> . LPAREN primary RPAREN
-    (15) primary -> . literal
-    (23) literal -> . INTEGER
-    (24) literal -> . IDENTIFIER
-    (25) literal -> . TRUE
-    (26) literal -> . FALSE
-    (27) literal -> . CLFLOAT
-    (28) literal -> . CLSTRING
-
-    LPAREN          shift and go to state 13
-    INTEGER         shift and go to state 11
-    IDENTIFIER      shift and go to state 12
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 14
-    CLFLOAT         shift and go to state 3
-    CLSTRING        shift and go to state 1
-
-    literal                        shift and go to state 23
-    primary                        shift and go to state 28
-
-state 19
-
-    (12) primary -> primary MULT . primary
-    (10) primary -> . primary PLUS primary
-    (11) primary -> . primary MINUS primary
-    (12) primary -> . primary MULT primary
-    (13) primary -> . primary DIV primary
-    (14) primary -> . LPAREN primary RPAREN
-    (15) primary -> . literal
-    (23) literal -> . INTEGER
-    (24) literal -> . IDENTIFIER
-    (25) literal -> . TRUE
-    (26) literal -> . FALSE
-    (27) literal -> . CLFLOAT
-    (28) literal -> . CLSTRING
-
-    LPAREN          shift and go to state 13
-    INTEGER         shift and go to state 11
-    IDENTIFIER      shift and go to state 12
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 14
-    CLFLOAT         shift and go to state 3
-    CLSTRING        shift and go to state 1
-
-    literal                        shift and go to state 23
-    primary                        shift and go to state 29
-
-state 20
-
-    (11) primary -> primary MINUS . primary
-    (10) primary -> . primary PLUS primary
-    (11) primary -> . primary MINUS primary
-    (12) primary -> . primary MULT primary
-    (13) primary -> . primary DIV primary
-    (14) primary -> . LPAREN primary RPAREN
-    (15) primary -> . literal
-    (23) literal -> . INTEGER
-    (24) literal -> . IDENTIFIER
-    (25) literal -> . TRUE
-    (26) literal -> . FALSE
-    (27) literal -> . CLFLOAT
-    (28) literal -> . CLSTRING
-
-    LPAREN          shift and go to state 13
-    INTEGER         shift and go to state 11
-    IDENTIFIER      shift and go to state 12
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 14
-    CLFLOAT         shift and go to state 3
-    CLSTRING        shift and go to state 1
-
-    literal                        shift and go to state 23
-    primary                        shift and go to state 30
-
-state 21
 
     (2) expression -> PRINT LPAREN . expression RPAREN
     (2) expression -> . PRINT LPAREN expression RPAREN
@@ -640,38 +532,37 @@ state 21
     (27) literal -> . CLFLOAT
     (28) literal -> . CLSTRING
 
-    PRINT           shift and go to state 4
-    LET             shift and go to state 15
-    LPAREN          shift and go to state 13
-    INTEGER         shift and go to state 11
-    IDENTIFIER      shift and go to state 12
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 14
-    CLFLOAT         shift and go to state 3
-    CLSTRING        shift and go to state 1
+    PRINT           shift and go to state 1
+    LET             shift and go to state 11
+    LPAREN          shift and go to state 3
+    INTEGER         shift and go to state 16
+    IDENTIFIER      shift and go to state 13
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    CLFLOAT         shift and go to state 14
+    CLSTRING        shift and go to state 5
 
+    expression                     shift and go to state 27
     literal                        shift and go to state 8
-    expression                     shift and go to state 31
-    primary                        shift and go to state 2
+    letdeclarations                shift and go to state 9
     statement                      shift and go to state 10
-    letdeclarations                shift and go to state 7
+    primary                        shift and go to state 15
 
-state 22
+state 18
 
-    (14) primary -> LPAREN primary . RPAREN
-    (10) primary -> primary . PLUS primary
-    (11) primary -> primary . MINUS primary
-    (12) primary -> primary . MULT primary
-    (13) primary -> primary . DIV primary
+    (4) expressions -> expression expressions .
 
-    RPAREN          shift and go to state 32
-    PLUS            shift and go to state 18
-    MINUS           shift and go to state 20
-    MULT            shift and go to state 19
-    DIV             shift and go to state 17
+    $end            reduce using rule 4 (expressions -> expression expressions .)
 
 
-state 23
+state 19
+
+    (3) expressions -> expression newline .
+
+    $end            reduce using rule 3 (expressions -> expression newline .)
+
+
+state 20
 
     (15) primary -> literal .
 
@@ -692,28 +583,233 @@ state 23
     RPAREN          reduce using rule 15 (primary -> literal .)
 
 
-state 24
+state 21
+
+    (14) primary -> LPAREN primary . RPAREN
+    (10) primary -> primary . PLUS primary
+    (11) primary -> primary . MINUS primary
+    (12) primary -> primary . MULT primary
+    (13) primary -> primary . DIV primary
+
+    RPAREN          shift and go to state 28
+    PLUS            shift and go to state 26
+    MINUS           shift and go to state 23
+    MULT            shift and go to state 25
+    DIV             shift and go to state 24
+
+
+state 22
 
     (5) letdeclarations -> LET IDENTIFIER . EQUALS expression
 
-    EQUALS          shift and go to state 33
+    EQUALS          shift and go to state 29
 
+
+state 23
+
+    (11) primary -> primary MINUS . primary
+    (10) primary -> . primary PLUS primary
+    (11) primary -> . primary MINUS primary
+    (12) primary -> . primary MULT primary
+    (13) primary -> . primary DIV primary
+    (14) primary -> . LPAREN primary RPAREN
+    (15) primary -> . literal
+    (23) literal -> . INTEGER
+    (24) literal -> . IDENTIFIER
+    (25) literal -> . TRUE
+    (26) literal -> . FALSE
+    (27) literal -> . CLFLOAT
+    (28) literal -> . CLSTRING
+
+    LPAREN          shift and go to state 3
+    INTEGER         shift and go to state 16
+    IDENTIFIER      shift and go to state 13
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    CLFLOAT         shift and go to state 14
+    CLSTRING        shift and go to state 5
+
+    literal                        shift and go to state 20
+    primary                        shift and go to state 30
+
+state 24
+
+    (13) primary -> primary DIV . primary
+    (10) primary -> . primary PLUS primary
+    (11) primary -> . primary MINUS primary
+    (12) primary -> . primary MULT primary
+    (13) primary -> . primary DIV primary
+    (14) primary -> . LPAREN primary RPAREN
+    (15) primary -> . literal
+    (23) literal -> . INTEGER
+    (24) literal -> . IDENTIFIER
+    (25) literal -> . TRUE
+    (26) literal -> . FALSE
+    (27) literal -> . CLFLOAT
+    (28) literal -> . CLSTRING
+
+    LPAREN          shift and go to state 3
+    INTEGER         shift and go to state 16
+    IDENTIFIER      shift and go to state 13
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    CLFLOAT         shift and go to state 14
+    CLSTRING        shift and go to state 5
+
+    literal                        shift and go to state 20
+    primary                        shift and go to state 31
 
 state 25
 
-    (4) expressions -> expression expressions .
+    (12) primary -> primary MULT . primary
+    (10) primary -> . primary PLUS primary
+    (11) primary -> . primary MINUS primary
+    (12) primary -> . primary MULT primary
+    (13) primary -> . primary DIV primary
+    (14) primary -> . LPAREN primary RPAREN
+    (15) primary -> . literal
+    (23) literal -> . INTEGER
+    (24) literal -> . IDENTIFIER
+    (25) literal -> . TRUE
+    (26) literal -> . FALSE
+    (27) literal -> . CLFLOAT
+    (28) literal -> . CLSTRING
 
-    $end            reduce using rule 4 (expressions -> expression expressions .)
+    LPAREN          shift and go to state 3
+    INTEGER         shift and go to state 16
+    IDENTIFIER      shift and go to state 13
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    CLFLOAT         shift and go to state 14
+    CLSTRING        shift and go to state 5
 
+    literal                        shift and go to state 20
+    primary                        shift and go to state 32
 
 state 26
 
-    (3) expressions -> expression newline .
+    (10) primary -> primary PLUS . primary
+    (10) primary -> . primary PLUS primary
+    (11) primary -> . primary MINUS primary
+    (12) primary -> . primary MULT primary
+    (13) primary -> . primary DIV primary
+    (14) primary -> . LPAREN primary RPAREN
+    (15) primary -> . literal
+    (23) literal -> . INTEGER
+    (24) literal -> . IDENTIFIER
+    (25) literal -> . TRUE
+    (26) literal -> . FALSE
+    (27) literal -> . CLFLOAT
+    (28) literal -> . CLSTRING
 
-    $end            reduce using rule 3 (expressions -> expression newline .)
+    LPAREN          shift and go to state 3
+    INTEGER         shift and go to state 16
+    IDENTIFIER      shift and go to state 13
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    CLFLOAT         shift and go to state 14
+    CLSTRING        shift and go to state 5
 
+    literal                        shift and go to state 20
+    primary                        shift and go to state 33
 
 state 27
+
+    (2) expression -> PRINT LPAREN expression . RPAREN
+
+    RPAREN          shift and go to state 34
+
+
+state 28
+
+    (14) primary -> LPAREN primary RPAREN .
+
+    PLUS            reduce using rule 14 (primary -> LPAREN primary RPAREN .)
+    MINUS           reduce using rule 14 (primary -> LPAREN primary RPAREN .)
+    MULT            reduce using rule 14 (primary -> LPAREN primary RPAREN .)
+    DIV             reduce using rule 14 (primary -> LPAREN primary RPAREN .)
+    newline         reduce using rule 14 (primary -> LPAREN primary RPAREN .)
+    PRINT           reduce using rule 14 (primary -> LPAREN primary RPAREN .)
+    LET             reduce using rule 14 (primary -> LPAREN primary RPAREN .)
+    LPAREN          reduce using rule 14 (primary -> LPAREN primary RPAREN .)
+    INTEGER         reduce using rule 14 (primary -> LPAREN primary RPAREN .)
+    IDENTIFIER      reduce using rule 14 (primary -> LPAREN primary RPAREN .)
+    TRUE            reduce using rule 14 (primary -> LPAREN primary RPAREN .)
+    FALSE           reduce using rule 14 (primary -> LPAREN primary RPAREN .)
+    CLFLOAT         reduce using rule 14 (primary -> LPAREN primary RPAREN .)
+    CLSTRING        reduce using rule 14 (primary -> LPAREN primary RPAREN .)
+    RPAREN          reduce using rule 14 (primary -> LPAREN primary RPAREN .)
+
+
+state 29
+
+    (5) letdeclarations -> LET IDENTIFIER EQUALS . expression
+    (2) expression -> . PRINT LPAREN expression RPAREN
+    (6) expression -> . statement
+    (7) expression -> . letdeclarations
+    (8) statement -> . primary
+    (9) statement -> . literal
+    (5) letdeclarations -> . LET IDENTIFIER EQUALS expression
+    (10) primary -> . primary PLUS primary
+    (11) primary -> . primary MINUS primary
+    (12) primary -> . primary MULT primary
+    (13) primary -> . primary DIV primary
+    (14) primary -> . LPAREN primary RPAREN
+    (15) primary -> . literal
+    (23) literal -> . INTEGER
+    (24) literal -> . IDENTIFIER
+    (25) literal -> . TRUE
+    (26) literal -> . FALSE
+    (27) literal -> . CLFLOAT
+    (28) literal -> . CLSTRING
+
+    PRINT           shift and go to state 1
+    LET             shift and go to state 11
+    LPAREN          shift and go to state 3
+    INTEGER         shift and go to state 16
+    IDENTIFIER      shift and go to state 13
+    TRUE            shift and go to state 4
+    FALSE           shift and go to state 12
+    CLFLOAT         shift and go to state 14
+    CLSTRING        shift and go to state 5
+
+    expression                     shift and go to state 35
+    literal                        shift and go to state 8
+    letdeclarations                shift and go to state 9
+    statement                      shift and go to state 10
+    primary                        shift and go to state 15
+
+state 30
+
+    (11) primary -> primary MINUS primary .
+    (10) primary -> primary . PLUS primary
+    (11) primary -> primary . MINUS primary
+    (12) primary -> primary . MULT primary
+    (13) primary -> primary . DIV primary
+
+    PLUS            reduce using rule 11 (primary -> primary MINUS primary .)
+    MINUS           reduce using rule 11 (primary -> primary MINUS primary .)
+    newline         reduce using rule 11 (primary -> primary MINUS primary .)
+    PRINT           reduce using rule 11 (primary -> primary MINUS primary .)
+    LET             reduce using rule 11 (primary -> primary MINUS primary .)
+    LPAREN          reduce using rule 11 (primary -> primary MINUS primary .)
+    INTEGER         reduce using rule 11 (primary -> primary MINUS primary .)
+    IDENTIFIER      reduce using rule 11 (primary -> primary MINUS primary .)
+    TRUE            reduce using rule 11 (primary -> primary MINUS primary .)
+    FALSE           reduce using rule 11 (primary -> primary MINUS primary .)
+    CLFLOAT         reduce using rule 11 (primary -> primary MINUS primary .)
+    CLSTRING        reduce using rule 11 (primary -> primary MINUS primary .)
+    RPAREN          reduce using rule 11 (primary -> primary MINUS primary .)
+    MULT            shift and go to state 25
+    DIV             shift and go to state 24
+
+  ! MULT            [ reduce using rule 11 (primary -> primary MINUS primary .) ]
+  ! DIV             [ reduce using rule 11 (primary -> primary MINUS primary .) ]
+  ! PLUS            [ shift and go to state 26 ]
+  ! MINUS           [ shift and go to state 23 ]
+
+
+state 31
 
     (13) primary -> primary DIV primary .
     (10) primary -> primary . PLUS primary
@@ -737,43 +833,13 @@ state 27
     CLSTRING        reduce using rule 13 (primary -> primary DIV primary .)
     RPAREN          reduce using rule 13 (primary -> primary DIV primary .)
 
-  ! PLUS            [ shift and go to state 18 ]
-  ! MINUS           [ shift and go to state 20 ]
-  ! MULT            [ shift and go to state 19 ]
-  ! DIV             [ shift and go to state 17 ]
+  ! PLUS            [ shift and go to state 26 ]
+  ! MINUS           [ shift and go to state 23 ]
+  ! MULT            [ shift and go to state 25 ]
+  ! DIV             [ shift and go to state 24 ]
 
 
-state 28
-
-    (10) primary -> primary PLUS primary .
-    (10) primary -> primary . PLUS primary
-    (11) primary -> primary . MINUS primary
-    (12) primary -> primary . MULT primary
-    (13) primary -> primary . DIV primary
-
-    PLUS            reduce using rule 10 (primary -> primary PLUS primary .)
-    MINUS           reduce using rule 10 (primary -> primary PLUS primary .)
-    newline         reduce using rule 10 (primary -> primary PLUS primary .)
-    PRINT           reduce using rule 10 (primary -> primary PLUS primary .)
-    LET             reduce using rule 10 (primary -> primary PLUS primary .)
-    LPAREN          reduce using rule 10 (primary -> primary PLUS primary .)
-    INTEGER         reduce using rule 10 (primary -> primary PLUS primary .)
-    IDENTIFIER      reduce using rule 10 (primary -> primary PLUS primary .)
-    TRUE            reduce using rule 10 (primary -> primary PLUS primary .)
-    FALSE           reduce using rule 10 (primary -> primary PLUS primary .)
-    CLFLOAT         reduce using rule 10 (primary -> primary PLUS primary .)
-    CLSTRING        reduce using rule 10 (primary -> primary PLUS primary .)
-    RPAREN          reduce using rule 10 (primary -> primary PLUS primary .)
-    MULT            shift and go to state 19
-    DIV             shift and go to state 17
-
-  ! MULT            [ reduce using rule 10 (primary -> primary PLUS primary .) ]
-  ! DIV             [ reduce using rule 10 (primary -> primary PLUS primary .) ]
-  ! PLUS            [ shift and go to state 18 ]
-  ! MINUS           [ shift and go to state 20 ]
-
-
-state 29
+state 32
 
     (12) primary -> primary MULT primary .
     (10) primary -> primary . PLUS primary
@@ -797,107 +863,41 @@ state 29
     CLSTRING        reduce using rule 12 (primary -> primary MULT primary .)
     RPAREN          reduce using rule 12 (primary -> primary MULT primary .)
 
-  ! PLUS            [ shift and go to state 18 ]
-  ! MINUS           [ shift and go to state 20 ]
-  ! MULT            [ shift and go to state 19 ]
-  ! DIV             [ shift and go to state 17 ]
+  ! PLUS            [ shift and go to state 26 ]
+  ! MINUS           [ shift and go to state 23 ]
+  ! MULT            [ shift and go to state 25 ]
+  ! DIV             [ shift and go to state 24 ]
 
 
-state 30
+state 33
 
-    (11) primary -> primary MINUS primary .
+    (10) primary -> primary PLUS primary .
     (10) primary -> primary . PLUS primary
     (11) primary -> primary . MINUS primary
     (12) primary -> primary . MULT primary
     (13) primary -> primary . DIV primary
 
-    PLUS            reduce using rule 11 (primary -> primary MINUS primary .)
-    MINUS           reduce using rule 11 (primary -> primary MINUS primary .)
-    newline         reduce using rule 11 (primary -> primary MINUS primary .)
-    PRINT           reduce using rule 11 (primary -> primary MINUS primary .)
-    LET             reduce using rule 11 (primary -> primary MINUS primary .)
-    LPAREN          reduce using rule 11 (primary -> primary MINUS primary .)
-    INTEGER         reduce using rule 11 (primary -> primary MINUS primary .)
-    IDENTIFIER      reduce using rule 11 (primary -> primary MINUS primary .)
-    TRUE            reduce using rule 11 (primary -> primary MINUS primary .)
-    FALSE           reduce using rule 11 (primary -> primary MINUS primary .)
-    CLFLOAT         reduce using rule 11 (primary -> primary MINUS primary .)
-    CLSTRING        reduce using rule 11 (primary -> primary MINUS primary .)
-    RPAREN          reduce using rule 11 (primary -> primary MINUS primary .)
-    MULT            shift and go to state 19
-    DIV             shift and go to state 17
+    PLUS            reduce using rule 10 (primary -> primary PLUS primary .)
+    MINUS           reduce using rule 10 (primary -> primary PLUS primary .)
+    newline         reduce using rule 10 (primary -> primary PLUS primary .)
+    PRINT           reduce using rule 10 (primary -> primary PLUS primary .)
+    LET             reduce using rule 10 (primary -> primary PLUS primary .)
+    LPAREN          reduce using rule 10 (primary -> primary PLUS primary .)
+    INTEGER         reduce using rule 10 (primary -> primary PLUS primary .)
+    IDENTIFIER      reduce using rule 10 (primary -> primary PLUS primary .)
+    TRUE            reduce using rule 10 (primary -> primary PLUS primary .)
+    FALSE           reduce using rule 10 (primary -> primary PLUS primary .)
+    CLFLOAT         reduce using rule 10 (primary -> primary PLUS primary .)
+    CLSTRING        reduce using rule 10 (primary -> primary PLUS primary .)
+    RPAREN          reduce using rule 10 (primary -> primary PLUS primary .)
+    MULT            shift and go to state 25
+    DIV             shift and go to state 24
 
-  ! MULT            [ reduce using rule 11 (primary -> primary MINUS primary .) ]
-  ! DIV             [ reduce using rule 11 (primary -> primary MINUS primary .) ]
-  ! PLUS            [ shift and go to state 18 ]
-  ! MINUS           [ shift and go to state 20 ]
+  ! MULT            [ reduce using rule 10 (primary -> primary PLUS primary .) ]
+  ! DIV             [ reduce using rule 10 (primary -> primary PLUS primary .) ]
+  ! PLUS            [ shift and go to state 26 ]
+  ! MINUS           [ shift and go to state 23 ]
 
-
-state 31
-
-    (2) expression -> PRINT LPAREN expression . RPAREN
-
-    RPAREN          shift and go to state 34
-
-
-state 32
-
-    (14) primary -> LPAREN primary RPAREN .
-
-    PLUS            reduce using rule 14 (primary -> LPAREN primary RPAREN .)
-    MINUS           reduce using rule 14 (primary -> LPAREN primary RPAREN .)
-    MULT            reduce using rule 14 (primary -> LPAREN primary RPAREN .)
-    DIV             reduce using rule 14 (primary -> LPAREN primary RPAREN .)
-    newline         reduce using rule 14 (primary -> LPAREN primary RPAREN .)
-    PRINT           reduce using rule 14 (primary -> LPAREN primary RPAREN .)
-    LET             reduce using rule 14 (primary -> LPAREN primary RPAREN .)
-    LPAREN          reduce using rule 14 (primary -> LPAREN primary RPAREN .)
-    INTEGER         reduce using rule 14 (primary -> LPAREN primary RPAREN .)
-    IDENTIFIER      reduce using rule 14 (primary -> LPAREN primary RPAREN .)
-    TRUE            reduce using rule 14 (primary -> LPAREN primary RPAREN .)
-    FALSE           reduce using rule 14 (primary -> LPAREN primary RPAREN .)
-    CLFLOAT         reduce using rule 14 (primary -> LPAREN primary RPAREN .)
-    CLSTRING        reduce using rule 14 (primary -> LPAREN primary RPAREN .)
-    RPAREN          reduce using rule 14 (primary -> LPAREN primary RPAREN .)
-
-
-state 33
-
-    (5) letdeclarations -> LET IDENTIFIER EQUALS . expression
-    (2) expression -> . PRINT LPAREN expression RPAREN
-    (6) expression -> . statement
-    (7) expression -> . letdeclarations
-    (8) statement -> . primary
-    (9) statement -> . literal
-    (5) letdeclarations -> . LET IDENTIFIER EQUALS expression
-    (10) primary -> . primary PLUS primary
-    (11) primary -> . primary MINUS primary
-    (12) primary -> . primary MULT primary
-    (13) primary -> . primary DIV primary
-    (14) primary -> . LPAREN primary RPAREN
-    (15) primary -> . literal
-    (23) literal -> . INTEGER
-    (24) literal -> . IDENTIFIER
-    (25) literal -> . TRUE
-    (26) literal -> . FALSE
-    (27) literal -> . CLFLOAT
-    (28) literal -> . CLSTRING
-
-    PRINT           shift and go to state 4
-    LET             shift and go to state 15
-    LPAREN          shift and go to state 13
-    INTEGER         shift and go to state 11
-    IDENTIFIER      shift and go to state 12
-    TRUE            shift and go to state 5
-    FALSE           shift and go to state 14
-    CLFLOAT         shift and go to state 3
-    CLSTRING        shift and go to state 1
-
-    literal                        shift and go to state 8
-    expression                     shift and go to state 35
-    primary                        shift and go to state 2
-    statement                      shift and go to state 10
-    letdeclarations                shift and go to state 7
 
 state 34
 
@@ -920,7 +920,6 @@ state 35
 
     (5) letdeclarations -> LET IDENTIFIER EQUALS expression .
 
-    RPAREN          reduce using rule 5 (letdeclarations -> LET IDENTIFIER EQUALS expression .)
     newline         reduce using rule 5 (letdeclarations -> LET IDENTIFIER EQUALS expression .)
     PRINT           reduce using rule 5 (letdeclarations -> LET IDENTIFIER EQUALS expression .)
     LET             reduce using rule 5 (letdeclarations -> LET IDENTIFIER EQUALS expression .)
@@ -931,6 +930,7 @@ state 35
     FALSE           reduce using rule 5 (letdeclarations -> LET IDENTIFIER EQUALS expression .)
     CLFLOAT         reduce using rule 5 (letdeclarations -> LET IDENTIFIER EQUALS expression .)
     CLSTRING        reduce using rule 5 (letdeclarations -> LET IDENTIFIER EQUALS expression .)
+    RPAREN          reduce using rule 5 (letdeclarations -> LET IDENTIFIER EQUALS expression .)
 
 WARNING: 
 WARNING: Conflicts:

@@ -13,5 +13,7 @@
 #JAVA STREAM OPERATIONS
 
 (exec 'import ListComprehension; toReturn = ListComprehension.prime1mod3([1, 2, 3, 7, 15, 17, 19, 23])')
+
 (exec 'import ListComprehension; import listcomp; [int(i) for i in listcomp.gettable("numberlist")[0]]')
+
 (exec 'import ListComprehension; import listcomp; toReturn = ListComprehension.prime1mod3([int(i) for i in listcomp.gettable("numberlist")[0]])')
