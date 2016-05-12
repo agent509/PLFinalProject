@@ -48,6 +48,6 @@ g1 = group()
 print
 print "Now printing for group 1"
 print "Grouop Member Names: ",g1.run('membernames')
-print "Group grade avg: "g1.run('gradeavg')
+print "Group grade avg: ",g1.run('gradeavg')
 g1.run('$addname')('Joseph')
 print "Added a group name: ",g1.run('membernames')
