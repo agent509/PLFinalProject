@@ -15,7 +15,6 @@ Number = (int, float) # A Lisp Number is implemented as a Python int or float
 ################ Environments
 
 letdict = {}
-vardict = {}
 
 def standard_env():
     "An environment with some Scheme standard procedures."
@@ -101,8 +100,10 @@ def eval(x, env=global_env):
     if not isinstance(x,List):
         if x in env:
             return env.find(x)[x]
+        elif x in letdict:
+            return letdict[x]                
         else:
-            return x                
+            return x
     else:
         if x[0] == 'quote':          # (quote exp)
             (_, exp) = x
@@ -122,7 +123,8 @@ def eval(x, env=global_env):
             return Procedure(parms, body, env)
         elif x[0] == 'let':
             letdict[eval(x[1],env)]=eval(x[2],env)
-            print(letdict)
+        elif x[0] == 'print':
+            print(eval(x[1],env))
         elif x[0] == 'exec':
             proc = eval(x[0], env)
             import re
@@ -133,5 +135,7 @@ def eval(x, env=global_env):
             if hasattr(proc,'__call__'):
                 args = [eval(exp, env) for exp in x[1:]]
                 return proc(*args)
+            elif x[0] in letdict:
+                return letdict[x[0]]
             else:
                 return x

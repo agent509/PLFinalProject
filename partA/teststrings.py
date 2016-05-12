@@ -1,4 +1,6 @@
-#(exec 'import ListComprehension; toReturn = ListComprehension.prime1mod3([1, 2, 3, 7, 15, 17, 19, 23])')
+import ListComprehension; toReturn = ListComprehension.prime1mod3([1, 2, 3, 7, 15, 17, 19, 23])
+
+print(toReturn)
 
 from java.util import stream;
 from java.lang import Math;

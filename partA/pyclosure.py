@@ -34,24 +34,20 @@ class group(csclass):
     run = f(1)
 
 
-
-
-
-s1 = csclass()
+c1 = csclass()
 print
-print s1.run('name')
-s1.run('$name')('mkaewo9E')
-print s1.run('name')
-print s1.run('gradeavg')
-s1.run('$gradeavg')('66')
-print s1.run('gradeavg')
-#print s1.data
+print "Class name: ",c1.run('name')
+c1.run('$name')('newclass')
+print "New Class name: ",c1.run('name')
+print "Grade Avg:",c1.run('gradeavg')
+c1.run('$gradeavg')('66')
+print "New Grade Avg:",c1.run('gradeavg')
 
 
 g1 = group()
 print
-print "Now printing for g1"
-print g1.run('membernames')
-print g1.run('gradeavg')
-g1.run('$addname')('newname')
-print g1.run('membernames')
+print "Now printing for group 1"
+print "Grouop Member Names: ",g1.run('membernames')
+print "Group grade avg: "g1.run('gradeavg')
+g1.run('$addname')('Joseph')
+print "Added a group name: ",g1.run('membernames')

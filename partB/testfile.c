@@ -1,1 +1,1 @@
-let a = "test"
+print(5+3)

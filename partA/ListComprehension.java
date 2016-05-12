@@ -10,6 +10,7 @@ public class ListComprehension {
 
         return newlist;
 
+
     }
     public static boolean isprime(int a){
         if (a == 2 || a == 3 || a == 5 || a == 7){

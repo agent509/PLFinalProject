@@ -234,6 +234,10 @@ def p_type(p):
             | OBJECT
             | CLSTRING'''
 
+#def p_assignment(p):
+#    '''assignment : IDENTIFIER EQUALS expression'''
+#    p[0] = "Assignment"
+
 
 def p_literal(p):
     '''literal : INTEGER

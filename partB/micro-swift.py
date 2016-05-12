@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from yacc import yacc
+from HMM import yacc
 import cmd
 
 class MiniLisp(cmd.Cmd):     # See https://docs.python.org/2/library/cmd.html
@@ -10,8 +10,8 @@ class MiniLisp(cmd.Cmd):     # See https://docs.python.org/2/library/cmd.html
 
     def __init__(self):
         cmd.Cmd.__init__(self)
-        self.prompt = "ml> "
-        self.intro  = "Bienvenido a MiniLisp"
+        self.prompt = "ms> "
+        self.intro  = "Welcome to micro-swift"
 
     def do_exit(self, args):
         """Exits from the console"""
@@ -33,7 +33,8 @@ class MiniLisp(cmd.Cmd):     # See https://docs.python.org/2/library/cmd.html
         """Called on an input line when the command prefix is not recognized.
            In that case we execute the line as Python code.
         """
-        result = yacc.parse(line)
+        print(line)
+        result = yacc.parse(line+'\n')
         print "AST is: ", result
         import lis
         r =  lis.eval(result)

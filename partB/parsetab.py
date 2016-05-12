@@ -5,9 +5,9 @@ _tabversion = '3.8'
 
 _lr_method = 'LALR'
 
-_lr_signature = '133697CF774A69672C95B1CB49D7094C'
+_lr_signature = 'CED1660FB95053D7805959BD5B17D0F0'
     
-_lr_action_items = {'LPAREN':([0,1,2,3,5,6,7,9,11,12,13,15,17,18,19,21,22,23,24,25,27,31,32,33,34,35,36,38,39,44,62,65,68,70,],[1,1,-10,-48,-46,-9,-11,-6,-45,-7,-49,-44,-47,-8,1,-17,1,1,1,1,37,-16,-15,-12,-14,-13,1,1,-5,-4,1,1,-24,-23,]),'OBJECT':([45,47,57,],[52,52,52,]),'CLFLOAT':([0,1,2,3,5,6,7,9,11,12,13,15,17,18,19,21,22,23,24,25,31,32,33,34,35,36,38,39,44,62,65,68,70,],[3,3,-10,-48,-46,-9,-11,-6,-45,-7,-49,-44,-47,-8,3,-17,3,3,3,3,-16,-15,-12,-14,-13,3,3,-5,-4,3,3,-24,-23,]),'LCURLY':([49,50,51,52,53,54,55,56,61,],[-26,-25,-28,-30,-29,-27,60,-31,63,]),'COLON':([42,],[47,]),'LET':([0,2,3,5,6,7,9,11,12,13,15,17,18,19,21,31,32,33,34,35,36,38,39,44,62,65,68,70,],[10,-10,-48,-46,-9,-11,-6,-45,-7,-49,-44,-47,-8,10,-17,-16,-15,-12,-14,-13,10,10,-5,-4,10,10,-24,-23,]),'DIV':([2,3,5,7,11,13,15,17,20,21,31,32,33,34,35,],[22,-48,-46,-17,-45,-49,-44,-47,22,-17,-16,-15,22,-14,22,]),'TRUE':([0,1,2,3,5,6,7,9,11,12,13,15,17,18,19,21,22,23,24,25,31,32,33,34,35,36,38,39,44,62,65,68,70,],[5,5,-10,-48,-46,-9,-11,-6,-45,-7,-49,-44,-47,-8,5,-17,5,5,5,5,-16,-15,-12,-14,-13,5,5,-5,-4,5,5,-24,-23,]),'MINUS':([2,3,5,7,11,13,15,17,20,21,31,32,33,34,35,],[25,-48,-46,-17,-45,-49,-44,-47,25,-17,-16,-15,-12,-14,-13,]),'MULT':([2,3,5,7,11,13,15,17,20,21,31,32,33,34,35,],[24,-48,-46,-17,-45,-49,-44,-47,24,-17,-16,-15,24,-14,24,]),'RPAREN':([3,5,11,13,15,17,20,21,31,32,33,34,35,37,41,43,49,50,51,52,53,54,56,58,59,],[-48,-46,-45,-49,-44,-47,31,-17,-16,-15,-12,-14,-13,40,46,-19,-26,-25,-28,-30,-29,-27,-31,-18,-20,]),'RCURLY':([29,30,64,67,],[-3,-2,66,69,]),'PLUS':([2,3,5,7,11,13,15,17,20,21,31,32,33,34,35,],[23,-48,-46,-17,-45,-49,-44,-47,23,-17,-16,-15,-12,-14,-13,]),'COMMA':([43,49,50,51,52,53,54,56,58,],[48,-26,-25,-28,-30,-29,-27,-31,-18,]),'IDENTIFIER':([0,1,2,3,5,6,7,9,10,11,12,13,14,15,16,17,18,19,21,22,23,24,25,31,32,33,34,35,36,37,38,39,44,48,62,65,68,70,],[11,11,-10,-48,-46,-9,-11,-6,26,-45,-7,-49,27,-44,28,-47,-8,11,-17,11,11,11,11,-16,-15,-12,-14,-13,11,42,11,-5,-4,42,11,11,-24,-23,]),'$end':([4,8,29,30,],[-1,0,-3,-2,]),'STRING':([45,47,57,],[56,56,56,]),'newline':([2,3,5,6,7,9,11,12,13,15,17,18,19,21,31,32,33,34,35,39,44,60,63,66,68,69,70,],[-10,-48,-46,-9,-11,-6,-45,-7,-49,-44,-47,-8,30,-17,-16,-15,-12,-14,-13,-5,-4,62,65,68,-24,70,-23,]),'EQUALS':([26,28,],[36,38,]),'FUNC':([0,2,3,5,6,7,9,11,12,13,15,17,18,19,21,31,32,33,34,35,36,38,39,44,62,65,68,70,],[14,-10,-48,-46,-9,-11,-6,-45,-7,-49,-44,-47,-8,14,-17,-16,-15,-12,-14,-13,14,14,-5,-4,14,14,-24,-23,]),'INTEGER':([0,1,2,3,5,6,7,9,11,12,13,15,17,18,19,21,22,23,24,25,31,32,33,34,35,36,38,39,44,62,65,68,70,],[15,15,-10,-48,-46,-9,-11,-6,-45,-7,-49,-44,-47,-8,15,-17,15,15,15,15,-16,-15,-12,-14,-13,15,15,-5,-4,15,15,-24,-23,]),'VAR':([0,2,3,5,6,7,9,11,12,13,15,17,18,19,21,31,32,33,34,35,36,38,39,44,62,65,68,70,],[16,-10,-48,-46,-9,-11,-6,-45,-7,-49,-44,-47,-8,16,-17,-16,-15,-12,-14,-13,16,16,-5,-4,16,16,-24,-23,]),'BOOL':([45,47,57,],[54,54,54,]),'FALSE':([0,1,2,3,5,6,7,9,11,12,13,15,17,18,19,21,22,23,24,25,31,32,33,34,35,36,38,39,44,62,65,68,70,],[17,17,-10,-48,-46,-9,-11,-6,-45,-7,-49,-44,-47,-8,17,-17,17,17,17,17,-16,-15,-12,-14,-13,17,17,-5,-4,17,17,-24,-23,]),'TUPLE':([45,47,57,],[53,53,53,]),'INT':([45,47,57,],[50,50,50,]),'FLOAT':([45,47,57,],[49,49,49,]),'LIST':([45,47,57,],[51,51,51,]),'MAP_TO':([40,46,],[45,57,]),'CLSTRING':([0,1,2,3,5,6,7,9,11,12,13,15,17,18,19,21,22,23,24,25,31,32,33,34,35,36,38,39,44,62,65,68,70,],[13,13,-10,-48,-46,-9,-11,-6,-45,-7,-49,-44,-47,-8,13,-17,13,13,13,13,-16,-15,-12,-14,-13,13,13,-5,-4,13,13,-24,-23,]),}
+_lr_action_items = {'$end':([6,9,25,26,],[-1,0,-4,-3,]),'FALSE':([0,1,2,3,5,7,8,10,11,12,13,14,16,17,18,19,20,21,23,27,28,29,30,32,33,34,35,],[14,-28,-8,-27,-25,-7,-9,-6,-23,-24,14,-26,14,14,14,14,14,14,-15,-13,-10,-12,-11,-14,14,-2,-5,]),'CLSTRING':([0,1,2,3,5,7,8,10,11,12,13,14,16,17,18,19,20,21,23,27,28,29,30,32,33,34,35,],[1,-28,-8,-27,-25,-7,-9,-6,-23,-24,1,-26,1,1,1,1,1,1,-15,-13,-10,-12,-11,-14,1,-2,-5,]),'newline':([1,2,3,5,7,8,10,11,12,14,16,23,27,28,29,30,32,34,35,],[-28,-8,-27,-25,-7,-9,-6,-23,-24,-26,26,-15,-13,-10,-12,-11,-14,-2,-5,]),'EQUALS':([24,],[33,]),'CLFLOAT':([0,1,2,3,5,7,8,10,11,12,13,14,16,17,18,19,20,21,23,27,28,29,30,32,33,34,35,],[3,-28,-8,-27,-25,-7,-9,-6,-23,-24,3,-26,3,3,3,3,3,3,-15,-13,-10,-12,-11,-14,3,-2,-5,]),'PLUS':([1,2,3,5,8,11,12,14,22,23,27,28,29,30,32,],[-28,18,-27,-25,-15,-23,-24,-26,18,-15,-13,-10,-12,-11,-14,]),'LET':([0,1,2,3,5,7,8,10,11,12,14,16,21,23,27,28,29,30,32,33,34,35,],[15,-28,-8,-27,-25,-7,-9,-6,-23,-24,-26,15,15,-15,-13,-10,-12,-11,-14,15,-2,-5,]),'LPAREN':([0,1,2,3,4,5,7,8,10,11,12,13,14,16,17,18,19,20,21,23,27,28,29,30,32,33,34,35,],[13,-28,-8,-27,21,-25,-7,-9,-6,-23,-24,13,-26,13,13,13,13,13,13,-15,-13,-10,-12,-11,-14,13,-2,-5,]),'PRINT':([0,1,2,3,5,7,8,10,11,12,14,16,21,23,27,28,29,30,32,33,34,35,],[4,-28,-8,-27,-25,-7,-9,-6,-23,-24,-26,4,4,-15,-13,-10,-12,-11,-14,4,-2,-5,]),'INTEGER':([0,1,2,3,5,7,8,10,11,12,13,14,16,17,18,19,20,21,23,27,28,29,30,32,33,34,35,],[11,-28,-8,-27,-25,-7,-9,-6,-23,-24,11,-26,11,11,11,11,11,11,-15,-13,-10,-12,-11,-14,11,-2,-5,]),'DIV':([1,2,3,5,8,11,12,14,22,23,27,28,29,30,32,],[-28,17,-27,-25,-15,-23,-24,-26,17,-15,-13,17,-12,17,-14,]),'IDENTIFIER':([0,1,2,3,5,7,8,10,11,12,13,14,15,16,17,18,19,20,21,23,27,28,29,30,32,33,34,35,],[12,-28,-8,-27,-25,-7,-9,-6,-23,-24,12,-26,24,12,12,12,12,12,12,-15,-13,-10,-12,-11,-14,12,-2,-5,]),'TRUE':([0,1,2,3,5,7,8,10,11,12,13,14,16,17,18,19,20,21,23,27,28,29,30,32,33,34,35,],[5,-28,-8,-27,-25,-7,-9,-6,-23,-24,5,-26,5,5,5,5,5,5,-15,-13,-10,-12,-11,-14,5,-2,-5,]),'MINUS':([1,2,3,5,8,11,12,14,22,23,27,28,29,30,32,],[-28,20,-27,-25,-15,-23,-24,-26,20,-15,-13,-10,-12,-11,-14,]),'MULT':([1,2,3,5,8,11,12,14,22,23,27,28,29,30,32,],[-28,19,-27,-25,-15,-23,-24,-26,19,-15,-13,19,-12,19,-14,]),'RPAREN':([1,2,3,5,7,8,10,11,12,14,22,23,27,28,29,30,31,32,34,35,],[-28,-8,-27,-25,-7,-9,-6,-23,-24,-26,32,-15,-13,-10,-12,-11,34,-14,-2,-5,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -16,7 +16,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'function':([0,19,36,38,62,65,],[12,12,12,12,12,12,]),'funcassign':([37,48,],[43,43,]),'funcassigns':([37,48,],[41,59,]),'type':([45,47,57,],[55,58,61,]),'primary':([0,1,19,22,23,24,25,36,38,62,65,],[2,20,2,32,33,34,35,2,2,2,2,]),'literal':([0,1,19,22,23,24,25,36,38,62,65,],[7,21,7,21,21,21,21,7,7,7,7,]),'program':([0,],[8,]),'statement':([0,19,36,38,62,65,],[9,9,9,9,9,9,]),'expressions':([0,19,62,65,],[4,29,64,67,]),'vardeclarations':([0,19,36,38,62,65,],[18,18,18,18,18,18,]),'expression':([0,19,36,38,62,65,],[19,19,39,44,19,19,]),'letdeclarations':([0,19,36,38,62,65,],[6,6,6,6,6,6,]),}
+_lr_goto_items = {'primary':([0,13,16,17,18,19,20,21,33,],[2,22,2,27,28,29,30,2,2,]),'literal':([0,13,16,17,18,19,20,21,33,],[8,23,8,23,23,23,23,8,8,]),'program':([0,],[9,]),'statement':([0,16,21,33,],[10,10,10,10,]),'expressions':([0,16,],[6,25,]),'expression':([0,16,21,33,],[16,16,31,35,]),'letdeclarations':([0,16,21,33,],[7,7,7,7,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -26,53 +26,32 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> program","S'",1,None,None,None),
-  ('program -> expressions','program',1,'p_program','HMM.py',119),
-  ('expressions -> expression newline','expressions',2,'p_expressions','HMM.py',124),
-  ('expressions -> expression expressions','expressions',2,'p_expressions','HMM.py',125),
-  ('vardeclarations -> VAR IDENTIFIER EQUALS expression','vardeclarations',4,'p_vardeclarations','HMM.py',129),
-  ('letdeclarations -> LET IDENTIFIER EQUALS expression','letdeclarations',4,'p_letdeclarations','HMM.py',134),
-  ('expression -> statement','expression',1,'p_expression','HMM.py',141),
-  ('expression -> function','expression',1,'p_expression','HMM.py',142),
-  ('expression -> vardeclarations','expression',1,'p_expression','HMM.py',143),
-  ('expression -> letdeclarations','expression',1,'p_expression','HMM.py',144),
-  ('statement -> primary','statement',1,'p_statement','HMM.py',150),
-  ('statement -> literal','statement',1,'p_statement','HMM.py',151),
-  ('primary -> primary PLUS primary','primary',3,'p_primary_binop','HMM.py',161),
-  ('primary -> primary MINUS primary','primary',3,'p_primary_binop','HMM.py',162),
-  ('primary -> primary MULT primary','primary',3,'p_primary_binop','HMM.py',163),
-  ('primary -> primary DIV primary','primary',3,'p_primary_binop','HMM.py',164),
-  ('primary -> LPAREN primary RPAREN','primary',3,'p_expression_group','HMM.py',188),
-  ('primary -> literal','primary',1,'p_expression_number','HMM.py',195),
-  ('funcassign -> IDENTIFIER COLON type','funcassign',3,'p_funcassign','HMM.py',203),
-  ('funcassigns -> funcassign','funcassigns',1,'p_funcassigns','HMM.py',206),
-  ('funcassigns -> funcassign COMMA funcassigns','funcassigns',3,'p_funcassigns','HMM.py',207),
-  ('types -> type','types',1,'p_types','HMM.py',210),
-  ('types -> type COMMA types','types',3,'p_types','HMM.py',211),
-  ('function -> FUNC IDENTIFIER LPAREN funcassigns RPAREN MAP_TO type LCURLY newline expressions RCURLY newline','function',12,'p_funciton','HMM.py',215),
-  ('function -> FUNC IDENTIFIER LPAREN RPAREN MAP_TO type LCURLY newline expressions RCURLY newline','function',11,'p_funciton','HMM.py',216),
-  ('type -> INT','type',1,'p_type','HMM.py',219),
-  ('type -> FLOAT','type',1,'p_type','HMM.py',220),
-  ('type -> BOOL','type',1,'p_type','HMM.py',221),
-  ('type -> LIST','type',1,'p_type','HMM.py',222),
-  ('type -> TUPLE','type',1,'p_type','HMM.py',223),
-  ('type -> OBJECT','type',1,'p_type','HMM.py',224),
-  ('type -> STRING','type',1,'p_type','HMM.py',225),
-  ('assignment -> IDENTIFIER EQUALS expression','assignment',3,'p_assignment','HMM.py',228),
-  ('equOp -> EQ_OP','equOp',1,'p_equOp','HMM.py',238),
-  ('equOp -> NE_OP','equOp',1,'p_equOp','HMM.py',239),
-  ('relOp -> LT_OP','relOp',1,'p_relOp','HMM.py',249),
-  ('relOp -> LE_OP','relOp',1,'p_relOp','HMM.py',250),
-  ('relOp -> GT_OP','relOp',1,'p_relOp','HMM.py',251),
-  ('relOp -> GE_OP','relOp',1,'p_relOp','HMM.py',252),
-  ('addOP -> PLUS','addOP',1,'p_addOP','HMM.py',256),
-  ('addOP -> MINUS','addOP',1,'p_addOP','HMM.py',257),
-  ('mulOP -> MULT','mulOP',1,'p_mulOP','HMM.py',267),
-  ('mulOP -> DIV','mulOP',1,'p_mulOP','HMM.py',268),
-  ('mulOP -> PRCNT','mulOP',1,'p_mulOP','HMM.py',269),
-  ('literal -> INTEGER','literal',1,'p_literal','HMM.py',288),
-  ('literal -> IDENTIFIER','literal',1,'p_literal','HMM.py',289),
-  ('literal -> TRUE','literal',1,'p_literal','HMM.py',290),
-  ('literal -> FALSE','literal',1,'p_literal','HMM.py',291),
-  ('literal -> CLFLOAT','literal',1,'p_literal','HMM.py',292),
-  ('literal -> CLSTRING','literal',1,'p_literal','HMM.py',293),
+  ('program -> expressions','program',1,'p_program','HMM.py',121),
+  ('expression -> PRINT LPAREN expression RPAREN','expression',4,'p_prints','HMM.py',125),
+  ('expressions -> expression newline','expressions',2,'p_expressions','HMM.py',132),
+  ('expressions -> expression expressions','expressions',2,'p_expressions','HMM.py',133),
+  ('letdeclarations -> LET IDENTIFIER EQUALS expression','letdeclarations',4,'p_letdeclarations','HMM.py',142),
+  ('expression -> statement','expression',1,'p_expression','HMM.py',150),
+  ('expression -> letdeclarations','expression',1,'p_expression','HMM.py',151),
+  ('statement -> primary','statement',1,'p_statement','HMM.py',157),
+  ('statement -> literal','statement',1,'p_statement','HMM.py',158),
+  ('primary -> primary PLUS primary','primary',3,'p_primary_binop','HMM.py',189),
+  ('primary -> primary MINUS primary','primary',3,'p_primary_binop','HMM.py',190),
+  ('primary -> primary MULT primary','primary',3,'p_primary_binop','HMM.py',191),
+  ('primary -> primary DIV primary','primary',3,'p_primary_binop','HMM.py',192),
+  ('primary -> LPAREN primary RPAREN','primary',3,'p_expression_group','HMM.py',216),
+  ('primary -> literal','primary',1,'p_expression_number','HMM.py',223),
+  ('type -> INT','type',1,'p_type','HMM.py',229),
+  ('type -> FLOAT','type',1,'p_type','HMM.py',230),
+  ('type -> BOOL','type',1,'p_type','HMM.py',231),
+  ('type -> LIST','type',1,'p_type','HMM.py',232),
+  ('type -> TUPLE','type',1,'p_type','HMM.py',233),
+  ('type -> OBJECT','type',1,'p_type','HMM.py',234),
+  ('type -> CLSTRING','type',1,'p_type','HMM.py',235),
+  ('literal -> INTEGER','literal',1,'p_literal','HMM.py',243),
+  ('literal -> IDENTIFIER','literal',1,'p_literal','HMM.py',244),
+  ('literal -> TRUE','literal',1,'p_literal','HMM.py',245),
+  ('literal -> FALSE','literal',1,'p_literal','HMM.py',246),
+  ('literal -> CLFLOAT','literal',1,'p_literal','HMM.py',247),
+  ('literal -> CLSTRING','literal',1,'p_literal','HMM.py',248),
 ]
